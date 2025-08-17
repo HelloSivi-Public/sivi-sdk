@@ -7,22 +7,22 @@
       {
         "type": "text",
         "content": "Momentum Athletics",
-        "styles": "title-large",
+        "styles": "title-large text-center",
         "position": {
           "x": 0,
           "y": 0,
           "width": 100,
-          "height": 15
+          "height": 30
         }
       },
       {
         "type": "visual",
         "id": "shape1",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Add your fitness journey visuals. Click to generate",
         "styles": "visual-large",
         "position": {
           "x": 0,
-          "y": 15,
+          "y": 30,
           "width": 50,
           "height": 70
         }
@@ -30,33 +30,33 @@
       {
         "type": "visual",
         "id": "shape2",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Showcase workout equipment. Click to generate",
         "styles": "visual-medium",
         "position": {
           "x": 50,
-          "y": 15,
+          "y": 30,
           "width": 50,
           "height": 35
         }
       },
       {
         "type": "text",
-        "content": "Transform your fitness journey with expert tips and guided training.",
-        "styles": "text-medium",
+        "content": "Transform your fitness journey.",
+        "styles": "text-medium text-left",
         "position": {
-          "x": 50,
-          "y": 50,
+          "x": 52,
+          "y": 62,
           "width": 50,
           "height": 25
         }
       },
       {
         "type": "text",
-        "content": "Ignite your motivation and get stronger every day.",
-        "styles": "text-small",
+        "content": "Join thousands who have ignited their motivation and built strength every day.",
+        "styles": "text-small text-left",
         "position": {
-          "x": 50,
-          "y": 75,
+          "x": 52,
+          "y": 85,
           "width": 50,
           "height": 10
         }
@@ -71,22 +71,22 @@
       {
         "type": "text",
         "content": "Momentum Athletics",
-        "styles": "title-large",
+        "styles": "title-large text-center",
         "position": {
           "x": 0,
-          "y": 0,
+          "y": 5,
           "width": 100,
-          "height": 15
+          "height": 20
         }
       },
       {
         "type": "visual",
         "id": "shape1",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Feature your main fitness content. Click to generate",
         "styles": "visual-large",
         "position": {
           "x": 0,
-          "y": 15,
+          "y": 30,
           "width": 100,
           "height": 40
         }
@@ -94,22 +94,22 @@
       {
         "type": "visual",
         "id": "shape2",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Add training highlights. Click to generate",
         "styles": "visual-medium",
         "position": {
           "x": 0,
-          "y": 55,
+          "y": 70,
           "width": 50,
           "height": 30
         }
       },
       {
         "type": "text",
-        "content": "Transform your fitness journey with expert tips and guided training.",
-        "styles": "text-medium",
+        "content": "Discover personalized workout plans, nutrition guidance, and expert coaching.",
+        "styles": "text-small text-left",
         "position": {
           "x": 50,
-          "y": 55,
+          "y": 70,
           "width": 50,
           "height": 30
         }
@@ -124,7 +124,7 @@
       {
         "type": "visual",
         "id": "shape1",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Add featured image or graphic. Click to generate",
         "styles": "visual-sidebar",
         "position": {
           "x": 0,
@@ -135,63 +135,30 @@
       },
       {
         "type": "text",
-        "content": "Heading2",
-        "styles": "title-large",
+        "content": "Digital Innovation Hub",
+        "styles": "title-large text-left",
         "position": {
           "x": 33,
-          "y": 0,
+          "y": 5,
           "width": 67,
-          "height": 20
+          "height": 30
         }
       },
       {
         "type": "text",
-        "content": "This is a paragraph",
-        "styles": "text-medium",
+        "content": "Transforming ideas into powerful digital solutions that drive business growth and innovation.",
+        "styles": "text-medium text-left",
         "position": {
           "x": 33,
-          "y": 20,
+          "y": 40,
           "width": 67,
           "height": 15
         }
       },
       {
-        "type": "text",
-        "content": "This is a paragraph",
-        "styles": "text-small",
-        "position": {
-          "x": 33,
-          "y": 35,
-          "width": 67,
-          "height": 10
-        }
-      },
-      {
-        "type": "text",
-        "content": "This is a paragraph",
-        "styles": "text-tiny",
-        "position": {
-          "x": 33,
-          "y": 45,
-          "width": 67,
-          "height": 8
-        }
-      },
-      {
-        "type": "text",
-        "content": "This is a paragraph",
-        "styles": "text-micro",
-        "position": {
-          "x": 33,
-          "y": 53,
-          "width": 67,
-          "height": 7
-        }
-      },
-      {
         "type": "visual",
         "id": "shape2",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Showcase your work or products. Click to generate",
         "styles": "visual-medium",
         "position": {
           "x": 33,
@@ -220,8 +187,8 @@
       },
       {
         "type": "text",
-        "content": "The Taste of Italy",
-        "styles": "title-medium",
+        "content": "Bella Vista Ristorante",
+        "styles": "title-medium text-center",
         "position": {
           "x": 0,
           "y": 18,
@@ -232,7 +199,7 @@
       {
         "type": "visual",
         "id": "shape1",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Feature signature dishes. Click to generate",
         "styles": "visual-large",
         "position": {
           "x": 0,
@@ -244,7 +211,7 @@
       {
         "type": "visual",
         "id": "shape2",
-        "placeholder": "Click to add visuals",
+        "placeholder": "Show restaurant ambiance. Click to generate",
         "styles": "visual-medium",
         "position": {
           "x": 0,
@@ -255,8 +222,8 @@
       },
       {
         "type": "text",
-        "content": "A family-owned Italian restaurant and market in Byron Center, Michigan, offering authentic cuisine, fine wines, and curated Mediterranean products since 1922.",
-        "styles": "text-small",
+        "content": "Experience authentic Italian cuisine in the heart of the city. Our family recipes, passed down through generations.",
+        "styles": "text-small text-justify",
         "position": {
           "x": 50,
           "y": 70,
