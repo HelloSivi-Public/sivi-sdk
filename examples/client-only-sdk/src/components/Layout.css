@@ -7,10 +7,43 @@
 
 .layout-selector h3 {
   margin: 0 0 20px 0;
-  color: #1e293b;
+  color: #ffffff;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.3px;
+}
+
+.layout-label {
+  margin: 0 0 8px 0;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.layout-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid rgba(226, 232, 240, 0.6);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7) url('data:image/svg+xml;charset=UTF-8,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath fill="%2364728b" d="M5.5 7l4.5 6 4.5-6z"/%3E%3C/svg%3E') no-repeat right 12px center;
+  color: #334155;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.layout-select:focus {
+  outline: none;
+  border-color: rgba(86, 98, 236, 0.6);
+  box-shadow: 0 0 0 4px rgba(86, 98, 236, 0.12);
+}
+
+.layout-select:hover {
+  border-color: rgba(86, 98, 236, 0.4);
 }
 
 .layout-grid {
@@ -81,8 +114,10 @@
 
 /* Layout Container */
 .layout-container {
-  width: 650px;
-  height: 750px;
+  width: 100%;
+  max-width: 650px;
+  aspect-ratio: 650 / 750;
+  height: auto;
   background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
   position: relative;
   box-shadow: 
@@ -95,8 +130,9 @@
 }
 
 .layout-container.restaurant-layout {
-  width: 700px;
-  height: 700px;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 1 / 1;
   padding: 24px;
   gap: 20px;
   display: flex;
@@ -301,16 +337,6 @@
 
 /* Responsive Design for Layout */
 @media (max-width: 1200px) {
-  .layout-container {
-    width: 550px;
-    height: 650px;
-  }
-  
-  .layout-container.restaurant-layout {
-    width: 600px;
-    height: 600px;
-  }
-  
   .title-large {
     font-size: 56px;
     letter-spacing: -2px;
@@ -348,14 +374,7 @@
     padding: 10px;
   }
   
-  .layout-container {
-    width: 320px;
-    height: 400px;
-  }
-  
   .layout-container.restaurant-layout {
-    width: 350px;
-    height: 350px;
     padding: 16px;
   }
   
@@ -378,5 +397,15 @@
   
   .logo-image {
     width: 140px;
+  }
+  
+  .layout-label {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  
+  .layout-select {
+    padding: 10px 12px;
+    font-size: 14px;
   }
 }

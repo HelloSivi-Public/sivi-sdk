@@ -119,18 +119,19 @@ const LayoutRenderer = ({ layoutDef, onVisualClick, imageUrl }) => {
 export const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
   return (
     <div className="layout-selector">
-      <h3>Choose Layout</h3>
-      <div className="layout-grid">
+      <label htmlFor="layoutSelect" className="layout-label">Choose Layout</label>
+      <select
+        id="layoutSelect"
+        className="layout-select"
+        value={currentLayout}
+        onChange={(e) => onLayoutChange(parseInt(e.target.value, 10))}
+      >
         {Object.values(layoutDefinitions).map(layout => (
-          <button
-            key={layout.id}
-            className={`layout-option ${currentLayout === layout.id ? 'active' : ''}`}
-            onClick={() => onLayoutChange(layout.id)}
-          >
+          <option key={layout.id} value={layout.id}>
             {layout.name}
-          </button>
+          </option>
         ))}
-      </div>
+      </select>
     </div>
   )
 }
