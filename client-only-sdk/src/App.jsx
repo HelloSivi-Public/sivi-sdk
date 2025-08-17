@@ -34,16 +34,18 @@ function App() {
             </div>
           ) : (
             <div className="control-panel">
+              <div className="control-content">
+                <LayoutSelector 
+                  currentLayout={currentLayout}
+                  onLayoutChange={setCurrentLayout}
+                />
+              </div>
               <button 
                 onClick={openVisualStudio} 
                 className="ai-studio-button"
               >
-                AI Design Studio  
+                AI Design Studio
               </button>
-              <LayoutSelector 
-                currentLayout={currentLayout}
-                onLayoutChange={setCurrentLayout}
-              />
             </div>
           )}
         </aside>
