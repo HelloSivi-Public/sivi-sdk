@@ -65,7 +65,7 @@ const LayoutRenderer = ({ layoutDef, handleVisualClick, imageUrl }) => {
         return (
           <div
             key={index}
-            className={`template-element text-element ${element.styles}`}
+            className={`layout-element text-element ${element.styles}`}
             style={elementStyle}
           >
             {element.content}
@@ -76,7 +76,7 @@ const LayoutRenderer = ({ layoutDef, handleVisualClick, imageUrl }) => {
         return (
           <div
             key={index}
-            className={`template-element visual-element ${element.styles}`}
+            className={`layout-element visual-element ${element.styles}`}
             style={elementStyle}
             onClick={(e) => handleShapeClick(e, element.id)}
           >
@@ -98,7 +98,7 @@ const LayoutRenderer = ({ layoutDef, handleVisualClick, imageUrl }) => {
         return (
           <div
             key={index}
-            className={`template-element logo-element ${element.styles}`}
+            className={`layout-element logo-element ${element.styles}`}
             style={elementStyle}
           >
             <img src={element.content} alt="Logo" className="logo-image" />
@@ -111,7 +111,7 @@ const LayoutRenderer = ({ layoutDef, handleVisualClick, imageUrl }) => {
   }
 
   return (
-    <div className={`template-container ${layoutDef.layout}`}>
+    <div className={`layout-container ${layoutDef.layout}`}>
       {layoutDef.elements.map(renderElement)}
     </div>
   )
@@ -121,15 +121,15 @@ const LayoutRenderer = ({ layoutDef, handleVisualClick, imageUrl }) => {
 const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
   return (
     <div className="layout-selector">
-      <h3>Choose Template</h3>
-      <div className="template-grid">
-        {Object.values(layoutDefinitions).map(template => (
+      <h3>Choose Layout</h3>
+      <div className="layout-grid">
+        {Object.values(layoutDefinitions).map(layout => (
           <button
-            key={template.id}
-            className={`template-option ${currentLayout === template.id ? 'active' : ''}`}
-            onClick={() => onLayoutChange(template.id)}
+            key={layout.id}
+            className={`layout-option ${currentLayout === layout.id ? 'active' : ''}`}
+            onClick={() => onLayoutChange(layout.id)}
           >
-            {template.name}
+            {layout.name}
           </button>
         ))}
       </div>
@@ -204,7 +204,7 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>Mail Editor</h1>
+        <h1>Web Editor</h1>
       </header>
       
       <div className="app-content">
@@ -235,7 +235,7 @@ function App() {
         </aside>
         
         <main className="main-content">
-          <div className="template-preview">
+          <div className="layout-preview">
             <LayoutRenderer
               layoutDef={currentLayoutDef}
               handleVisualClick={handleVisualClick}

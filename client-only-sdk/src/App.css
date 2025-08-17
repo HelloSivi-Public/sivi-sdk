@@ -116,25 +116,25 @@ body {
   background-color: #e2e8f0;
 }
 
-/* Template Selector */
-.template-selector {
+/* Layout Selector */
+.layout-selector {
   flex: 1;
 }
 
-.template-selector h3 {
+.layout-selector h3 {
   margin: 0 0 16px 0;
   color: #334155;
   font-size: 18px;
   font-weight: 600;
 }
 
-.template-grid {
+.layout-grid {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.template-option {
+.layout-option {
   padding: 12px 16px;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
@@ -147,12 +147,12 @@ body {
   font-weight: 500;
 }
 
-.template-option:hover {
+.layout-option:hover {
   border-color: #5662EC;
   background-color: #f8fafc;
 }
 
-.template-option.active {
+.layout-option.active {
   border-color: #5662EC;
   background-color: #5662EC;
   color: white;
@@ -168,7 +168,7 @@ body {
   padding: 20px;
 }
 
-.template-preview {
+.layout-preview {
   width: 100%;
   height: calc(100% - 80px);
   display: flex;
@@ -176,8 +176,8 @@ body {
   align-items: center;
 }
 
-/* Template Container */
-.template-container {
+/* Layout Container */
+.layout-container {
   width: 600px;
   height: 700px;
   background-color: #f1f5f9;
@@ -187,7 +187,7 @@ body {
   overflow: hidden;
 }
 
-.template-container.restaurant-layout {
+.layout-container.restaurant-layout {
   width: 658px;
   height: 658px;
   padding: 16px;
@@ -196,8 +196,8 @@ body {
   flex-direction: column;
 }
 
-/* Template Elements */
-.template-element {
+/* Layout Elements */
+.layout-element {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,12 +315,12 @@ body {
     width: 300px;
   }
   
-  .template-container {
+  .layout-container {
     width: 500px;
     height: 600px;
   }
   
-  .template-container.restaurant-layout {
+  .layout-container.restaurant-layout {
     width: 550px;
     height: 550px;
   }
@@ -345,26 +345,26 @@ body {
     gap: 16px;
   }
   
-  .template-selector {
+  .layout-selector {
     flex: none;
   }
   
-  .template-grid {
+  .layout-grid {
     flex-direction: row;
     overflow-x: auto;
   }
   
-  .template-option {
+  .layout-option {
     white-space: nowrap;
     min-width: 200px;
   }
   
-  .template-container {
+  .layout-container {
     width: 400px;
     height: 500px;
   }
   
-  .template-container.restaurant-layout {
+  .layout-container.restaurant-layout {
     width: 450px;
     height: 450px;
   }
