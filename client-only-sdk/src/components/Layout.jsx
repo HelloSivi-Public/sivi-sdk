@@ -1,5 +1,6 @@
 import React from 'react'
-import layoutDefinitions from '../layouts.json'
+import layoutDefinitions from './layouts.json'
+import './Layout.css'
 
 // Layout Logic Hook
 const useLayoutLogic = ({ imageUrl, onVisualClick, layoutDef }) => {
