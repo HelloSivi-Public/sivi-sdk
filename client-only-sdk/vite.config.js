@@ -1,7 +1,16 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import { loadEnv } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
+export default defineConfig(({ mode }) => {
+  // Load env file based on `mode` in the current directory.
+  const env = loadEnv(mode, '.');
+  
+  return {
+    plugins: [react()],
+    define: {
+      'process.env.SIVI_API_KEY_ID': JSON.stringify(env.SIVI_API_KEY_ID)
+    }
+  };
+});
