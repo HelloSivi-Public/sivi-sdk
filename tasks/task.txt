@@ -1,0 +1,5 @@
+Create a React app and use grommet UI components, Antd and style-components
+1. It has a header, footer and content.
+2. Main content area has a sidebar with icon buttons and a main content area
+3. Main content area renders a template that is stored as a JSON with element types. its like a web page template with text, image and icon
+
