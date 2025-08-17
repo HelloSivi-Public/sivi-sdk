@@ -373,6 +373,10 @@
   .layout-preview {
     padding: 10px;
   }
+
+  .visual-placeholder {
+    font-size: 14px;
+  }
   
   .layout-container.restaurant-layout {
     padding: 16px;
@@ -407,5 +411,38 @@
   .layout-select {
     padding: 10px 12px;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 460px) {  
+  .title-large {
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+  
+  .title-medium {
+    font-size: 16px;
+  }
+  
+  .text-medium {
+    font-size: 14px;
+  }
+  
+  .text-small {
+    font-size: 12px;
+  }
+  
+  .logo-image {
+    width: 120px;
+  }
+  
+  .layout-label {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+  
+  .layout-select {
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
