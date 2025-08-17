@@ -1,0 +1,5 @@
+Express App with dummy user Id and a login route to be called
+
+Sivi - Get API_KEY (Store API_KEY in ENV)
+Use it to send.
+maileditor is a known provider [Needs to be implemented in server, so as of now no checks are there]

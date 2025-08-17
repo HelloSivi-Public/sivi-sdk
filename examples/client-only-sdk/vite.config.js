@@ -5,7 +5,7 @@ import { loadEnv } from 'vite'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current directory.
-  const env = loadEnv(mode, process.cwd());
+  const env = loadEnv(mode, '.');
   
   return {
     plugins: [react()],

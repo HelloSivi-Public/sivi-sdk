@@ -8,9 +8,9 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- Public SDK -->
-    <!-- <script src="http://localhost:4848/script.js?namespace=SIVI&apiKeyId=%SIVI_API_KEY_ID%"></script> -->
-    <script src="https://sdk.sivicloud.com/script.js?namespace=SIVI&apiKeyId=%SIVI_API_KEY_ID%"></script>
+    <!-- Local SDK - Can be any Public or Ent based on the ENV -->
+    <!-- <script src="http://localhost:4849/script.js?namespace=SIVI&apiKeyId=234234"></script> -->
+	 <script src="https://sdk.sivicloud.com/script.js?namespace=SIVI&apiKeyId=${apiKeyId}"></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
