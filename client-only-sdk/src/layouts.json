@@ -1,0 +1,185 @@
+{
+    "1": {
+      "id": 1,
+      "name": "Momentum Athletics - Side Layout",
+      "layout": "side-layout",
+      "elements": [
+            {
+          "type": "text",
+          "content": "Momentum Athletics",
+          "styles": "title-large",
+          "position": { "x": 0, "y": 0, "width": 100, "height": 15
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape1",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-large",
+          "position": { "x": 0, "y": 15, "width": 50, "height": 70
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape2",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-medium",
+          "position": { "x": 50, "y": 15, "width": 50, "height": 35
+                }
+            },
+            {
+          "type": "text",
+          "content": "Transform your fitness journey with expert tips and guided training.",
+          "styles": "text-medium",
+          "position": { "x": 50, "y": 50, "width": 50, "height": 25
+                }
+            },
+            {
+          "type": "text",
+          "content": "Ignite your motivation and get stronger every day.",
+          "styles": "text-small",
+          "position": { "x": 50, "y": 75, "width": 50, "height": 10
+                }
+            }
+        ]
+    },
+    "2": {
+      "id": 2,
+      "name": "Momentum Athletics - Vertical Layout",
+      "layout": "vertical-layout",
+      "elements": [
+            {
+          "type": "text",
+          "content": "Momentum Athletics",
+          "styles": "title-large",
+          "position": { "x": 0, "y": 0, "width": 100, "height": 15
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape1",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-large",
+          "position": { "x": 0, "y": 15, "width": 100, "height": 40
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape2",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-medium",
+          "position": { "x": 0, "y": 55, "width": 50, "height": 30
+                }
+            },
+            {
+          "type": "text",
+          "content": "Transform your fitness journey with expert tips and guided training.",
+          "styles": "text-medium",
+          "position": { "x": 50, "y": 55, "width": 50, "height": 30
+                }
+            }
+        ]
+    },
+    "3": {
+      "id": 3,
+      "name": "Content Focus Layout",
+      "layout": "content-layout",
+      "elements": [
+            {
+          "type": "visual",
+          "id": "shape1",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-sidebar",
+          "position": { "x": 0, "y": 0, "width": 33, "height": 100
+                }
+            },
+            {
+          "type": "text",
+          "content": "Heading2",
+          "styles": "title-large",
+          "position": { "x": 33, "y": 0, "width": 67, "height": 20
+                }
+            },
+            {
+          "type": "text",
+          "content": "This is a paragraph",
+          "styles": "text-medium",
+          "position": { "x": 33, "y": 20, "width": 67, "height": 15
+                }
+            },
+            {
+          "type": "text",
+          "content": "This is a paragraph",
+          "styles": "text-small",
+          "position": { "x": 33, "y": 35, "width": 67, "height": 10
+                }
+            },
+            {
+          "type": "text",
+          "content": "This is a paragraph",
+          "styles": "text-tiny",
+          "position": { "x": 33, "y": 45, "width": 67, "height": 8
+                }
+            },
+            {
+          "type": "text",
+          "content": "This is a paragraph",
+          "styles": "text-micro",
+          "position": { "x": 33, "y": 53, "width": 67, "height": 7
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape2",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-medium",
+          "position": { "x": 33, "y": 67, "width": 67, "height": 33
+                }
+            }
+        ]
+    },
+    "4": {
+      "id": 4,
+      "name": "Italian Restaurant Layout",
+      "layout": "restaurant-layout",
+      "elements": [
+            {
+          "type": "logo",
+          "content": "/temp_logo.png",
+          "styles": "logo-style",
+          "position": { "x": 0, "y": 0, "width": 30, "height": 15
+                }
+            },
+            {
+          "type": "text",
+          "content": "The Taste of Italy",
+          "styles": "title-medium",
+          "position": { "x": 0, "y": 18, "width": 100, "height": 13
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape1",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-large",
+          "position": { "x": 0, "y": 34, "width": 100, "height": 33
+                }
+            },
+            {
+          "type": "visual",
+          "id": "shape2",
+          "placeholder": "Click to add visuals",
+          "styles": "visual-medium",
+          "position": { "x": 0, "y": 70, "width": 50, "height": 26
+                }
+            },
+            {
+          "type": "text",
+          "content": "A family-owned Italian restaurant and market in Byron Center, Michigan, offering authentic cuisine, fine wines, and curated Mediterranean products since 1922.",
+          "styles": "text-small",
+          "position": { "x": 50, "y": 70, "width": 50, "height": 26
+                }
+            }
+        ]
+    }
+}
