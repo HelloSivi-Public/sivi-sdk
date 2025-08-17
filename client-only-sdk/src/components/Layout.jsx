@@ -1,0 +1,169 @@
+import React from 'react'
+import layoutDefinitions from '../layouts.json'
+
+// Layout Logic Hook
+const useLayoutLogic = ({ imageUrl, onVisualClick, layoutDef }) => {
+  const selectedVisual = React.useRef(null)
+  const [visualShapes, setVisualShapes] = React.useState(() => {
+    const shapes = {}
+    layoutDef.elements.forEach(element => {
+      if (element.type === 'visual') {
+        shapes[element.id] = { imageUrl: null }
+      }
+    })
+    return shapes
+  })
+
+  const handleShapeClick = (event, id) => {
+    let width = event.target.offsetWidth
+    let height = event.target.offsetHeight
+
+    if (event.target.nodeName === 'P') {
+      width = event.target.parentElement.offsetWidth
+      height = event.target.parentElement.offsetHeight
+    }
+
+    selectedVisual.current = id
+    onVisualClick && onVisualClick({ width, height })
+  }
+
+  React.useEffect(() => {
+    if (imageUrl && selectedVisual.current) {
+      setVisualShapes(prev => ({
+        ...prev,
+        [selectedVisual.current]: { imageUrl: imageUrl }
+      }))
+    }
+  }, [imageUrl])
+
+  return { visualShapes, handleShapeClick }
+}
+
+// Layout Renderer Component
+const LayoutRenderer = ({ layoutDef, onVisualClick, imageUrl }) => {
+  const { visualShapes, handleShapeClick } = useLayoutLogic({
+    imageUrl,
+    onVisualClick,
+    layoutDef
+  })
+
+  const renderElement = (element, index) => {
+    const elementStyle = {
+      position: 'absolute',
+      left: `${element.position.x}%`,
+      top: `${element.position.y}%`,
+      width: `${element.position.width}%`,
+      height: `${element.position.height}%`
+    }
+    const visualData = visualShapes[element.id]
+
+    switch (element.type) {
+      case 'text':
+        return (
+          <div
+            key={index}
+            className={`layout-element text-element ${element.styles}`}
+            style={elementStyle}
+          >
+            {element.content}
+          </div>
+        )
+      
+      case 'visual':
+        return (
+          <div
+            key={index}
+            className={`layout-element visual-element ${element.styles}`}
+            style={elementStyle}
+            onClick={(e) => handleShapeClick(e, element.id)}
+          >
+            {visualData?.imageUrl ? (
+              <img 
+                src={visualData.imageUrl} 
+                alt="Extracted Image" 
+                className="visual-image"
+              />
+            ) : (
+              <div className="visual-placeholder">
+                <p>{element.placeholder}</p>
+              </div>
+            )}
+          </div>
+        )
+      
+      case 'logo':
+        return (
+          <div
+            key={index}
+            className={`layout-element logo-element ${element.styles}`}
+            style={elementStyle}
+          >
+            <img src={element.content} alt="Logo" className="logo-image" />
+          </div>
+        )
+      
+      default:
+        return null
+    }
+  }
+
+  return (
+    <div className={`layout-container ${layoutDef.layout}`}>
+      {layoutDef.elements.map(renderElement)}
+    </div>
+  )
+}
+
+// Layout Selection Component
+export const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
+  return (
+    <div className="layout-selector">
+      <h3>Choose Layout</h3>
+      <div className="layout-grid">
+        {Object.values(layoutDefinitions).map(layout => (
+          <button
+            key={layout.id}
+            className={`layout-option ${currentLayout === layout.id ? 'active' : ''}`}
+            onClick={() => onLayoutChange(layout.id)}
+          >
+            {layout.name}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Layout Preview Component
+export const LayoutPreview = ({ currentLayout, onVisualClick, imageUrl }) => {
+  const currentLayoutDef = layoutDefinitions[currentLayout]
+
+  return (
+    <div className="layout-preview">
+      <LayoutRenderer
+        layoutDef={currentLayoutDef}
+        onVisualClick={onVisualClick}
+        imageUrl={imageUrl}
+      />
+    </div>
+  )
+}
+
+// Main Layout Component (for backward compatibility)
+const Layout = ({ currentLayout, onLayoutChange, onVisualClick, imageUrl }) => {
+  return (
+    <>
+      <LayoutSelector 
+        currentLayout={currentLayout}
+        onLayoutChange={onLayoutChange}
+      />
+      <LayoutPreview 
+        currentLayout={currentLayout}
+        onVisualClick={onVisualClick}
+        imageUrl={imageUrl}
+      />
+    </>
+  )
+}
+
+export default Layout
