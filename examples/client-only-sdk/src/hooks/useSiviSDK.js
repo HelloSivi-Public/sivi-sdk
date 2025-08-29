@@ -37,6 +37,7 @@ const useSiviSDK = () => {
 
   const openVisualStudio = React.useCallback(() => {
     setIsVisualOpen(true)
+    paramsRef.current = { width: 1080, height: 1080 }
   }, [])
 
   // Handle SIVI SDK initialization and events
