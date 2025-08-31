@@ -14,12 +14,12 @@ export default defineConfig(({ mode }) => {
       {
         name: 'html-transform',
         transformIndexHtml(html) {
-          return html.replace(/%SIVI_API_KEY_ID%/g, env.SIVI_API_KEY_ID || 'your-api-key-id-here')
+          return html.replace(/%SIVI_ACCOUNT_EMAIL%/g, env.SIVI_ACCOUNT_EMAIL || 'your@example.com')
         }
       }
     ],
     define: {
-      'process.env.SIVI_API_KEY_ID': JSON.stringify(env.SIVI_API_KEY_ID)
+      'process.env.SIVI_ACCOUNT_EMAIL': JSON.stringify(env.SIVI_ACCOUNT_EMAIL)
     }
   };
 });
