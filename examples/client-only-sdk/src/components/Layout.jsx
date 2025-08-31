@@ -137,7 +137,7 @@ export const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
 }
 
 // Layout Preview Component
-export const LayoutPreview = ({ currentLayout, onVisualClick, imageUrl }) => {
+export const LayoutPreview = ({ currentLayout, onVisualClick }) => {
   const currentLayoutDef = layoutDefinitions[currentLayout]
 
   return (
@@ -145,27 +145,7 @@ export const LayoutPreview = ({ currentLayout, onVisualClick, imageUrl }) => {
       <LayoutRenderer
         layoutDef={currentLayoutDef}
         onVisualClick={onVisualClick}
-        imageUrl={imageUrl}
       />
     </div>
   )
 }
-
-// Main Layout Component (for backward compatibility)
-const Layout = ({ currentLayout, onLayoutChange, onVisualClick, imageUrl }) => {
-  return (
-    <>
-      <LayoutSelector 
-        currentLayout={currentLayout}
-        onLayoutChange={onLayoutChange}
-      />
-      <LayoutPreview 
-        currentLayout={currentLayout}
-        onVisualClick={onVisualClick}
-        imageUrl={imageUrl}
-      />
-    </>
-  )
-}
-
-export default Layout

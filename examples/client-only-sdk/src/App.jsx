@@ -7,11 +7,10 @@ function App() {
   const [currentLayout, setCurrentLayout] = React.useState(1)
   
   const {
-    isVisualOpen,
-    imageUrl,
+    isAIStudioOpen,
     handleVisualClick,
-    handleRemoveVisual,
-    openVisualStudio,
+    hideAIDesignStudio,
+    showAIDesignStudio,
     IFRAME_CONTAINER_ID
   } = useSiviSDK()
 
@@ -23,12 +22,12 @@ function App() {
       
       <div className="app-content">
         <aside className="sidebar">
-          {isVisualOpen ? (
+          {isAIStudioOpen ? ( 
             <div className="visual-panel">
               <div id={IFRAME_CONTAINER_ID} className="iframe-container">
                 {/* Iframe placeholder */}
               </div>
-              <button className="back-button" onClick={handleRemoveVisual}>
+              <button className="back-button" onClick={hideAIDesignStudio}>
                 Back to Home
               </button>
             </div>
@@ -41,7 +40,7 @@ function App() {
                 />
               </div>
               <button 
-                onClick={openVisualStudio} 
+                onClick={showAIDesignStudio} 
                 className="ai-studio-button"
               >
                 AI Design Studio
@@ -54,7 +53,6 @@ function App() {
           <LayoutPreview 
             currentLayout={currentLayout}
             onVisualClick={handleVisualClick}
-            imageUrl={imageUrl}
           />
         </main>
       </div>

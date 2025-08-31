@@ -19,6 +19,7 @@
         "type": "visual",
         "id": "shape1",
         "placeholder": "Add your fitness journey visuals. Click to generate",
+        "prompt": "Create a modern social media post for fitness journey in dark green theme and professional fonts",
         "styles": "visual-large",
         "position": {
           "x": 0,
@@ -31,6 +32,7 @@
         "type": "visual",
         "id": "shape2",
         "placeholder": "Showcase workout equipment. Click to generate",
+        "prompt": "Create a modern post for workout equipment in dark blue theme and professional fonts",
         "styles": "visual-medium",
         "position": {
           "x": 50,
@@ -83,6 +85,7 @@
         "type": "visual",
         "id": "shape1",
         "placeholder": "Feature your main fitness content. Click to generate",
+        "prompt": "Create a modern post for heavy weight fitness equipment in blue and green theme and professional fonts",
         "styles": "visual-large",
         "position": {
           "x": 0,
@@ -95,6 +98,7 @@
         "type": "visual",
         "id": "shape2",
         "placeholder": "Add training highlights. Click to generate",
+        "prompt": "Create a modern post to showcase benefits of fitness journey in green theme and professional fonts",
         "styles": "visual-medium",
         "position": {
           "x": 0,
@@ -125,6 +129,7 @@
         "type": "visual",
         "id": "shape1",
         "placeholder": "Add featured image or graphic. Click to generate",
+        "prompt": "Create a modern post to digital innovation hub in blue and green theme and professional fonts",
         "styles": "visual-sidebar",
         "position": {
           "x": 0,
@@ -159,6 +164,7 @@
         "type": "visual",
         "id": "shape2",
         "placeholder": "Showcase your work or products. Click to generate",
+        "prompt": "Create a modern post to digital growth with AI in green theme and professional fonts",
         "styles": "visual-medium",
         "position": {
           "x": 33,
@@ -200,6 +206,7 @@
         "type": "visual",
         "id": "shape1",
         "placeholder": "Feature signature dishes. Click to generate",
+        "prompt": "Graphic post for continental dishes in vibrant color theme and playful fonts",
         "styles": "visual-large",
         "position": {
           "x": 0,
@@ -212,6 +219,7 @@
         "type": "visual",
         "id": "shape2",
         "placeholder": "Show restaurant ambiance. Click to generate",
+        "prompt": "Post to show case a modern restaurant ambiance in brown theme and playful fonts",
         "styles": "visual-medium",
         "position": {
           "x": 0,

@@ -4,12 +4,15 @@ const IFRAME_CONTAINER_ID = 'sivi-container'
 
 const useSiviSDK = () => {
   const paramsRef = React.useRef(null)
-  const [isVisualOpen, setIsVisualOpen] = React.useState(false)
-  const [imageUrl, setImageUrl] = React.useState(null)
+  const [isAIStudioOpen, setIsAIStudioOpen] = React.useState(false)
+
+  const handleSelectedDesignImage = React.useCallback((imageUrl) => {
+    console.log('Selected image URL:', imageUrl)
+  }, [])
 
   const handleVisualClick = React.useCallback(({ width, height }) => {
-    if (!isVisualOpen) {
-      setIsVisualOpen(true)
+    if (!isAIStudioOpen) {
+      setIsAIStudioOpen(true)
       paramsRef.current = { width, height }
     } else {
       const options = {
@@ -28,21 +31,21 @@ const useSiviSDK = () => {
       }
       window.SIVI?.show(options, IFRAME_CONTAINER_ID)
     }
-  }, [isVisualOpen])
+  }, [isAIStudioOpen])
 
-  const handleRemoveVisual = React.useCallback(() => {
+  const hideAIDesignStudio = React.useCallback(() => {
     window.SIVI?.hide()
-    setIsVisualOpen(false)
+    setIsAIStudioOpen(false)
   }, [])
 
-  const openVisualStudio = React.useCallback(() => {
-    setIsVisualOpen(true)
+  const showAIDesignStudio = React.useCallback(() => {
+    setIsAIStudioOpen(true)
     paramsRef.current = { width: 1080, height: 1080 }
   }, [])
 
   // Handle SIVI SDK initialization and events
   React.useEffect(() => {
-    if (isVisualOpen && paramsRef.current) {
+    if (isAIStudioOpen && paramsRef.current) {
       const params = {
         medium: 'custom',
         mediumType: 'custom',
@@ -53,14 +56,14 @@ const useSiviSDK = () => {
       window.SIVI?.show(params, IFRAME_CONTAINER_ID)
       paramsRef.current = null
     }
-  }, [isVisualOpen])
+  }, [isAIStudioOpen])
 
   // Handle SIVI SDK events
   React.useEffect(() => {
     const handleSiviEvents = async (event, responseCallback) => {
       if (event.type === 'EXTRACT') {
         const URL = event.data.src + '?timestamp=' + Date.now()
-        setImageUrl(URL)
+        handleSelectedDesignImage(URL),
         responseCallback("done")
       }
     }
@@ -73,11 +76,10 @@ const useSiviSDK = () => {
   }, [])
 
   return {
-    isVisualOpen,
-    imageUrl,
+    isAIStudioOpen,
     handleVisualClick,
-    handleRemoveVisual,
-    openVisualStudio,
+    showAIDesignStudio,
+    hideAIDesignStudio,
     IFRAME_CONTAINER_ID
   }
 }
