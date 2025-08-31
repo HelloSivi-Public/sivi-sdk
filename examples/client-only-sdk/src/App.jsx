@@ -11,6 +11,7 @@ function App() {
     handleVisualClick,
     hideAIDesignStudio,
     showAIDesignStudio,
+    registerEventHandler,
     IFRAME_CONTAINER_ID
   } = useSiviSDK()
 
@@ -53,6 +54,7 @@ function App() {
           <LayoutPreview 
             currentLayout={currentLayout}
             onVisualClick={handleVisualClick}
+            registerEventHandler={registerEventHandler}
           />
         </main>
       </div>

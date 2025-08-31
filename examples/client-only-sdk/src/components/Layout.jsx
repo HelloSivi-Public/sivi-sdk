@@ -137,14 +137,31 @@ export const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
 }
 
 // Layout Preview Component
-export const LayoutPreview = ({ currentLayout, onVisualClick }) => {
+export const LayoutPreview = ({ currentLayout, onVisualClick, registerEventHandler }) => {
   const currentLayoutDef = layoutDefinitions[currentLayout]
+  const [extractedImageUrl, setExtractedImageUrl] = React.useState(null)
+
+  React.useEffect(() => {
+    if (registerEventHandler) {
+      const handleSiviEvents = async (event, responseCallback) => {
+        if (event.type === 'EXTRACT') {
+          const URL = event.data.src + '?timestamp=' + Date.now()
+          setExtractedImageUrl(URL)
+          responseCallback("done")
+        }
+      }
+
+      const unregister = registerEventHandler(handleSiviEvents)
+      return unregister
+    }
+  }, [registerEventHandler])
 
   return (
     <div className="layout-preview">
       <LayoutRenderer
         layoutDef={currentLayoutDef}
         onVisualClick={onVisualClick}
+        imageUrl={extractedImageUrl}
       />
     </div>
   )

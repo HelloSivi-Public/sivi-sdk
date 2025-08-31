@@ -5,10 +5,7 @@ const IFRAME_CONTAINER_ID = 'sivi-container'
 const useSiviSDK = () => {
   const paramsRef = React.useRef(null)
   const [isAIStudioOpen, setIsAIStudioOpen] = React.useState(false)
-
-  const handleSelectedDesignImage = React.useCallback((imageUrl) => {
-    console.log('Selected image URL:', imageUrl)
-  }, [])
+  const eventHandlersRef = React.useRef(new Set())
 
   const handleVisualClick = React.useCallback(({ width, height }) => {
     if (!isAIStudioOpen) {
@@ -43,6 +40,17 @@ const useSiviSDK = () => {
     paramsRef.current = { width: 1080, height: 1080 }
   }, [])
 
+  const registerEventHandler = React.useCallback((handler) => {
+    eventHandlersRef.current.add(handler)
+    return () => {
+      eventHandlersRef.current.delete(handler)
+    }
+  }, [])
+
+  const unregisterEventHandler = React.useCallback((handler) => {
+    eventHandlersRef.current.delete(handler)
+  }, [])
+
   // Handle SIVI SDK initialization and events
   React.useEffect(() => {
     if (isAIStudioOpen && paramsRef.current) {
@@ -61,11 +69,19 @@ const useSiviSDK = () => {
   // Handle SIVI SDK events
   React.useEffect(() => {
     const handleSiviEvents = async (event, responseCallback) => {
-      if (event.type === 'EXTRACT') {
-        const URL = event.data.src + '?timestamp=' + Date.now()
-        handleSelectedDesignImage(URL),
-        responseCallback("done")
-      }
+      // Call all registered event handlers
+      const handlers = Array.from(eventHandlersRef.current)
+      
+      // Execute all handlers in parallel
+      const handlerPromises = handlers.map(async (handler) => {
+        try {
+          await handler(event, responseCallback)
+        } catch (error) {
+          console.error('Error in event handler:', error)
+        }
+      })
+      
+      await Promise.all(handlerPromises)
     }
 
     window.SIVI?.events(handleSiviEvents)
@@ -80,6 +96,8 @@ const useSiviSDK = () => {
     handleVisualClick,
     showAIDesignStudio,
     hideAIDesignStudio,
+    registerEventHandler,
+    unregisterEventHandler,
     IFRAME_CONTAINER_ID
   }
 }
