@@ -257,7 +257,7 @@
 }
 
 .visual-element:hover {
-  transform: scale(1.03) translateY(-6px);
+  transform: scale(1.00) translateY(-2px);
   box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.15),
     0 0 0 1px rgba(255, 255, 255, 0.5);
@@ -265,7 +265,7 @@
 }
 
 .visual-element:active {
-  transform: scale(1.01) translateY(-2px);
+  transform: scale(1.00) translateY(-2px);
 }
 
 .visual-large {
@@ -292,12 +292,69 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
+/* Visual Image Container */
+.visual-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .visual-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   position: relative;
   z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+/* Edit Overlay */
+.edit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+  backdrop-filter: blur(2px);
+}
+
+.visual-image-container:hover .edit-overlay {
+  opacity: 1;
+}
+
+.edit-button {
+  background: linear-gradient(135deg, #000 0%, #333 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(86, 98, 236, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(86, 98, 236, 0.4);
+  background: linear-gradient(135deg, #4c56d8 0%, #5a73e6 100%);
+}
+
+.edit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(86, 98, 236, 0.3);
 }
 
 .visual-placeholder {

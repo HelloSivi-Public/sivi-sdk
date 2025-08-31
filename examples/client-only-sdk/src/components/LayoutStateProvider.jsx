@@ -3,9 +3,10 @@ import confetti from 'canvas-confetti'
 import { LayoutStateContext } from './LayoutStateContext'
 
 // Layout State Provider
-export const LayoutStateProvider = ({ children, registerEventHandler }) => {
+export const LayoutStateProvider = ({ children, registerEventHandler, openDesignVariantEditor }) => {
   const selectedVisualRef = React.useRef(null)
   const [visualShapes, setVisualShapes] = React.useState({})
+  const [imageVariantMap, setImageVariantMap] = React.useState({})
   const [currentLayoutId, setCurrentLayoutId] = React.useState(null)
 
   // Initialize visual shapes when layout changes
@@ -35,6 +36,13 @@ export const LayoutStateProvider = ({ children, registerEventHandler }) => {
           if (selectedVisualRef.current) {
             const URL = event.data.variantImageUrl + '?timestamp=' + Date.now()
             const variantId = event.data.variantId
+            
+            // Store variant ID mapping per image URL
+            setImageVariantMap(prev => ({
+              ...prev,
+              [URL]: variantId
+            }))
+            
             setVisualShapes(prev => ({
               ...prev,
               [selectedVisualRef.current]: { imageUrl: URL, variantId }
@@ -60,10 +68,20 @@ export const LayoutStateProvider = ({ children, registerEventHandler }) => {
     }
   }, [registerEventHandler])
 
+  // Handle edit image functionality
+  const handleEditImage = React.useCallback((imageUrl) => {
+    const variantId = imageVariantMap[imageUrl]
+    if (variantId && openDesignVariantEditor) {
+      openDesignVariantEditor({ variantId })
+    }
+  }, [imageVariantMap, openDesignVariantEditor])
+
   const contextValue = {
     visualShapes,
+    imageVariantMap,
     setSelectedVisual,
-    initializeLayout
+    initializeLayout,
+    handleEditImage
   }
 
   return (

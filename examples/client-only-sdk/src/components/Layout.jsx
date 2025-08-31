@@ -12,7 +12,7 @@ const useLayoutLogic = ({ onVisualClick, layoutDef }) => {
     throw new Error('useLayoutLogic must be used within LayoutStateProvider')
   }
 
-  const { visualShapes, setSelectedVisual, initializeLayout } = context
+  const { visualShapes, setSelectedVisual, initializeLayout, handleEditImage } = context
 
   // Initialize layout on mount or when layout changes
   React.useEffect(() => {
@@ -33,12 +33,12 @@ const useLayoutLogic = ({ onVisualClick, layoutDef }) => {
     onVisualClick && onVisualClick(params)
   }, [setSelectedVisual, onVisualClick])
 
-  return { visualShapes, handleShapeClick }
+  return { visualShapes, handleShapeClick, handleEditImage }
 }
 
 // Layout Renderer Component
 const LayoutRenderer = ({ layoutDef, onVisualClick }) => {
-  const { visualShapes, handleShapeClick } = useLayoutLogic({
+  const { visualShapes, handleShapeClick, handleEditImage } = useLayoutLogic({
     onVisualClick,
     layoutDef
   })
@@ -74,11 +74,24 @@ const LayoutRenderer = ({ layoutDef, onVisualClick }) => {
             onClick={(e) => handleShapeClick(e, element)}
           >
             {visualData?.imageUrl ? (
-              <img 
-                src={visualData.imageUrl} 
-                alt="Extracted Image" 
-                className="visual-image"
-              />
+              <div className="visual-image-container">
+                <img 
+                  src={visualData.imageUrl} 
+                  alt="Extracted Image" 
+                  className="visual-image"
+                />
+                <div className="edit-overlay">
+                  <button 
+                    className="edit-button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleEditImage(visualData.imageUrl)
+                    }}
+                  >
+                    ✏️ Edit Design
+                  </button>
+                </div>
+              </div>
             ) : (
               <div className="visual-placeholder">
                 <p>{element.placeholder}</p>
@@ -132,12 +145,15 @@ export const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
 }
 
 // Layout Preview Component
-export const LayoutPreview = ({ currentLayout, onVisualClick, registerEventHandler }) => {
+export const LayoutPreview = ({ currentLayout, onVisualClick, registerEventHandler, openDesignVariantEditor }) => {
   const currentLayoutDef = layoutDefinitions[currentLayout]
 
   return (
     <div className="layout-preview">
-      <LayoutStateProvider registerEventHandler={registerEventHandler}>
+      <LayoutStateProvider 
+        registerEventHandler={registerEventHandler}
+        openDesignVariantEditor={openDesignVariantEditor}
+      >
         <LayoutRenderer
           layoutDef={currentLayoutDef}
           onVisualClick={onVisualClick}
