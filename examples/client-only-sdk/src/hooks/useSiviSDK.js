@@ -41,7 +41,6 @@ const useSiviSDK = () => {
 
   const showAIDesignStudio = React.useCallback(() => {
     setIsAIStudioOpen(true)
-    paramsRef.current = defaultOptions
   }, [])
 
   const registerEventHandler = React.useCallback((handler) => {
@@ -60,7 +59,6 @@ const useSiviSDK = () => {
     if (isAIStudioOpen) {
       const options = Object.assign({}, defaultOptions, paramsRef.current)
       window.SIVI?.show(options, IFRAME_CONTAINER_ID)
-      paramsRef.current = null
     }
   }, [isAIStudioOpen])
 

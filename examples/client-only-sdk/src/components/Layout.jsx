@@ -20,8 +20,15 @@ const useLayoutLogic = ({ onVisualClick, layoutDef }) => {
   }, [layoutDef, initializeLayout])
 
   const handleShapeClick = React.useCallback((event, element) => {
+    console.log("handleShapeClick", event, element)
     setSelectedVisual(element.id)
-    onVisualClick && onVisualClick({ ...element })
+
+    const params = {
+      prompt: element.prompt,
+      width: element.position.width * 10,
+      height: element.position.height * 10
+    }
+    onVisualClick && onVisualClick(params)
   }, [setSelectedVisual, onVisualClick])
 
   return { visualShapes, handleShapeClick }
