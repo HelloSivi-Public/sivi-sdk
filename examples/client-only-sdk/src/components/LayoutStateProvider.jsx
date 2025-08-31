@@ -1,4 +1,5 @@
 import React from 'react'
+import confetti from 'canvas-confetti'
 import { LayoutStateContext } from './LayoutStateContext'
 
 // Layout State Provider
@@ -30,12 +31,25 @@ export const LayoutStateProvider = ({ children, registerEventHandler }) => {
   React.useEffect(() => {
     if (registerEventHandler) {
       const handleSiviEvents = async (event, responseCallback) => {
-        if (event.type === 'EXTRACT' && selectedVisualRef.current) {
-          const URL = event.data.src + '?timestamp=' + Date.now()
-          setVisualShapes(prev => ({
-            ...prev,
-            [selectedVisualRef.current]: { imageUrl: URL }
-          }))
+        if (event.type === 'SIVI_WIDGET_EVENT_DESIGN_VARIANT_SELECTED') {
+          if (selectedVisualRef.current) {
+            const URL = event.data.variantImageUrl + '?timestamp=' + Date.now()
+            setVisualShapes(prev => ({
+              ...prev,
+              [selectedVisualRef.current]: { imageUrl: URL }
+            }))
+
+            // Celebrate with confetti effect
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: { y: 0.6 },
+              colors: ['#5662EC', '#EF9AB2', '#FFD700', '#FF6B6B', '#4ECDC4']
+            })
+            
+          } else {
+            console.error("No selected visual, please select a visual!")
+          }
           responseCallback("done")
         }
       }
