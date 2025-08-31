@@ -34,9 +34,10 @@ export const LayoutStateProvider = ({ children, registerEventHandler }) => {
         if (event.type === 'SIVI_WIDGET_EVENT_DESIGN_VARIANT_SELECTED') {
           if (selectedVisualRef.current) {
             const URL = event.data.variantImageUrl + '?timestamp=' + Date.now()
+            const variantId = event.data.variantId
             setVisualShapes(prev => ({
               ...prev,
-              [selectedVisualRef.current]: { imageUrl: URL }
+              [selectedVisualRef.current]: { imageUrl: URL, variantId }
             }))
 
             // Celebrate with confetti effect

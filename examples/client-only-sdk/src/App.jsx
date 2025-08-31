@@ -9,8 +9,9 @@ function App() {
   const {
     isAIStudioOpen,
     handleVisualClick,
-    hideAIDesignStudio,
-    showAIDesignStudio,
+    hideAIStudio,
+    showAIStudio,
+    openDesignVariantEditor,
     registerEventHandler,
     IFRAME_CONTAINER_ID
   } = useSiviSDK()
@@ -28,7 +29,7 @@ function App() {
               <div id={IFRAME_CONTAINER_ID} className="iframe-container">
                 {/* Iframe placeholder */}
               </div>
-              <button className="back-button" onClick={hideAIDesignStudio}>
+              <button className="back-button" onClick={hideAIStudio}>
                 Back to Home
               </button>
             </div>
@@ -41,7 +42,7 @@ function App() {
                 />
               </div>
               <button 
-                onClick={showAIDesignStudio} 
+                onClick={showAIStudio} 
                 className="ai-studio-button"
               >
                 AI Design Studio
@@ -55,6 +56,7 @@ function App() {
             currentLayout={currentLayout}
             onVisualClick={handleVisualClick}
             registerEventHandler={registerEventHandler}
+            openDesignVariantEditor={openDesignVariantEditor}
           />
         </main>
       </div>

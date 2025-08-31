@@ -36,14 +36,20 @@ const useSiviSDK = () => {
     }
   }, [isAIStudioOpen])
 
-  const hideAIDesignStudio = React.useCallback(() => {
+  const hideAIStudio = React.useCallback(() => {
     window.SIVI?.hide()
     setIsAIStudioOpen(false)
   }, [])
 
-  const showAIDesignStudio = React.useCallback(() => {
+  const showAIStudio = React.useCallback(() => {
     setIsAIStudioOpen(true)
   }, [])
+
+
+  const openDesignVariantEditor = React.useCallback((params) => {
+    window.SIVI?.openDesignVariantEditor(params)
+  }, [])
+
 
   const registerEventHandler = React.useCallback((handler) => {
     eventHandlersRef.current.add(handler)
@@ -92,8 +98,9 @@ const useSiviSDK = () => {
   return {
     isAIStudioOpen,
     handleVisualClick,
-    showAIDesignStudio,
-    hideAIDesignStudio,
+    openDesignVariantEditor,
+    showAIStudio,
+    hideAIStudio,
     registerEventHandler,
     unregisterEventHandler,
     IFRAME_CONTAINER_ID
