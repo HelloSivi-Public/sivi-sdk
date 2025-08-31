@@ -2,31 +2,35 @@ import React from 'react'
 
 const IFRAME_CONTAINER_ID = 'sivi-container'
 
+const defaultOptions = {
+  type: "custom",
+  subtype: "custom",
+  width: 1080,
+  height: 1080,
+  prompt: "Create a modern social media post for a coffee restaurant",
+  language: "english",
+  colors: ["#5662EC", "#EF9AB2"],
+  numOfVariants: 3,
+  outputFormats: "png",
+  config: {
+    enableLoginUI: true,
+    enableDesignEditor: true,
+  }
+}
+
 const useSiviSDK = () => {
   const paramsRef = React.useRef(null)
   const [isAIStudioOpen, setIsAIStudioOpen] = React.useState(false)
   const eventHandlersRef = React.useRef(new Set())
 
-  const handleVisualClick = React.useCallback(({ width, height }) => {
+  const handleVisualClick = React.useCallback((params) => {
+    paramsRef.current = params
     if (!isAIStudioOpen) {
       setIsAIStudioOpen(true)
-      paramsRef.current = { width, height }
     } else {
-      const options = {
-        type: "custom",
-        subtype: "custom",
-        dimension: { width: 1080, height: 1080 },
-        prompt: "Create a modern social media post",
-        language: "english",
-        colors: ["#5662EC", "#EF9AB2"],
-        numOfVariants: 3,
-        outputFormats: "png",
-        config: {
-          enableLoginUI: true,
-          enableDesignEditor: true,
-        }
-      }
-      window.SIVI?.show(options, IFRAME_CONTAINER_ID)
+      // Already Widget is open, so just set the options  
+      const options = Object.assign({}, defaultOptions, params)
+      window.SIVI?.setOptions(options)
     }
   }, [isAIStudioOpen])
 
@@ -37,7 +41,7 @@ const useSiviSDK = () => {
 
   const showAIDesignStudio = React.useCallback(() => {
     setIsAIStudioOpen(true)
-    paramsRef.current = { width: 1080, height: 1080 }
+    paramsRef.current = defaultOptions
   }, [])
 
   const registerEventHandler = React.useCallback((handler) => {
@@ -51,22 +55,16 @@ const useSiviSDK = () => {
     eventHandlersRef.current.delete(handler)
   }, [])
 
-  // Handle SIVI SDK initialization and events
+  // Handle SIVI SDK initialization ///////////////////////////////
   React.useEffect(() => {
-    if (isAIStudioOpen && paramsRef.current) {
-      const params = {
-        medium: 'custom',
-        mediumType: 'custom',
-        width: paramsRef.current.width,
-        height: paramsRef.current.height,
-        objective: 'promote-product',
-      }
-      window.SIVI?.show(params, IFRAME_CONTAINER_ID)
+    if (isAIStudioOpen) {
+      const options = Object.assign({}, defaultOptions, paramsRef.current)
+      window.SIVI?.show(options, IFRAME_CONTAINER_ID)
       paramsRef.current = null
     }
   }, [isAIStudioOpen])
 
-  // Handle SIVI SDK events
+  //////////////// Handle SIVI SDK events ////////////////////////
   React.useEffect(() => {
     const handleSiviEvents = async (event, responseCallback) => {
       // Call all registered event handlers
