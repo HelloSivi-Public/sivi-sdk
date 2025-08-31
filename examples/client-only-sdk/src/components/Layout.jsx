@@ -2,20 +2,82 @@ import React from 'react'
 import layoutDefinitions from './layouts.json'
 import './Layout.css'
 
-// Layout Logic Hook
-const useLayoutLogic = ({ imageUrl, onVisualClick, layoutDef }) => {
-  const selectedVisual = React.useRef(null)
-  const [visualShapes, setVisualShapes] = React.useState(() => {
-    const shapes = {}
-    layoutDef.elements.forEach(element => {
-      if (element.type === 'visual') {
-        shapes[element.id] = { imageUrl: null }
-      }
-    })
-    return shapes
-  })
+// Shared Layout State Context
+const LayoutStateContext = React.createContext()
 
-  const handleShapeClick = (event, id) => {
+// Layout State Provider
+const LayoutStateProvider = ({ children, registerEventHandler }) => {
+  const selectedVisualRef = React.useRef(null)
+  const [visualShapes, setVisualShapes] = React.useState({})
+  const [currentLayoutId, setCurrentLayoutId] = React.useState(null)
+
+  // Initialize visual shapes when layout changes
+  const initializeLayout = React.useCallback((layoutDef) => {
+    if (layoutDef.id !== currentLayoutId) {
+      const shapes = {}
+      layoutDef.elements.forEach(element => {
+        if (element.type === 'visual') {
+          shapes[element.id] = { imageUrl: null }
+        }
+      })
+      setVisualShapes(shapes)
+      setCurrentLayoutId(layoutDef.id)
+    }
+  }, [currentLayoutId])
+
+  // Handle visual selection
+  const setSelectedVisual = React.useCallback((visualId) => {
+    selectedVisualRef.current = visualId
+  }, [])
+
+  // Register SIVI event handler
+  React.useEffect(() => {
+    if (registerEventHandler) {
+      const handleSiviEvents = async (event, responseCallback) => {
+        if (event.type === 'EXTRACT' && selectedVisualRef.current) {
+          const URL = event.data.src + '?timestamp=' + Date.now()
+          setVisualShapes(prev => ({
+            ...prev,
+            [selectedVisualRef.current]: { imageUrl: URL }
+          }))
+          responseCallback("done")
+        }
+      }
+
+      const unregister = registerEventHandler(handleSiviEvents)
+      return unregister
+    }
+  }, [registerEventHandler])
+
+  const contextValue = {
+    visualShapes,
+    setSelectedVisual,
+    initializeLayout
+  }
+
+  return (
+    <LayoutStateContext.Provider value={contextValue}>
+      {children}
+    </LayoutStateContext.Provider>
+  )
+}
+
+// Layout Logic Hook
+const useLayoutLogic = ({ onVisualClick, layoutDef }) => {
+  const context = React.useContext(LayoutStateContext)
+  
+  if (!context) {
+    throw new Error('useLayoutLogic must be used within LayoutStateProvider')
+  }
+
+  const { visualShapes, setSelectedVisual, initializeLayout } = context
+
+  // Initialize layout on mount or when layout changes
+  React.useEffect(() => {
+    initializeLayout(layoutDef)
+  }, [layoutDef, initializeLayout])
+
+  const handleShapeClick = React.useCallback((event, id) => {
     let width = event.target.offsetWidth
     let height = event.target.offsetHeight
 
@@ -24,26 +86,16 @@ const useLayoutLogic = ({ imageUrl, onVisualClick, layoutDef }) => {
       height = event.target.parentElement.offsetHeight
     }
 
-    selectedVisual.current = id
+    setSelectedVisual(id)
     onVisualClick && onVisualClick({ width, height })
-  }
-
-  React.useEffect(() => {
-    if (imageUrl && selectedVisual.current) {
-      setVisualShapes(prev => ({
-        ...prev,
-        [selectedVisual.current]: { imageUrl: imageUrl }
-      }))
-    }
-  }, [imageUrl])
+  }, [setSelectedVisual, onVisualClick])
 
   return { visualShapes, handleShapeClick }
 }
 
 // Layout Renderer Component
-const LayoutRenderer = ({ layoutDef, onVisualClick, imageUrl }) => {
+const LayoutRenderer = ({ layoutDef, onVisualClick }) => {
   const { visualShapes, handleShapeClick } = useLayoutLogic({
-    imageUrl,
     onVisualClick,
     layoutDef
   })
@@ -139,30 +191,15 @@ export const LayoutSelector = ({ currentLayout, onLayoutChange }) => {
 // Layout Preview Component
 export const LayoutPreview = ({ currentLayout, onVisualClick, registerEventHandler }) => {
   const currentLayoutDef = layoutDefinitions[currentLayout]
-  const [extractedImageUrl, setExtractedImageUrl] = React.useState(null)
-
-  React.useEffect(() => {
-    if (registerEventHandler) {
-      const handleSiviEvents = async (event, responseCallback) => {
-        if (event.type === 'EXTRACT') {
-          const URL = event.data.src + '?timestamp=' + Date.now()
-          setExtractedImageUrl(URL)
-          responseCallback("done")
-        }
-      }
-
-      const unregister = registerEventHandler(handleSiviEvents)
-      return unregister
-    }
-  }, [registerEventHandler])
 
   return (
     <div className="layout-preview">
-      <LayoutRenderer
-        layoutDef={currentLayoutDef}
-        onVisualClick={onVisualClick}
-        imageUrl={extractedImageUrl}
-      />
+      <LayoutStateProvider registerEventHandler={registerEventHandler}>
+        <LayoutRenderer
+          layoutDef={currentLayoutDef}
+          onVisualClick={onVisualClick}
+        />
+      </LayoutStateProvider>
     </div>
   )
 }
