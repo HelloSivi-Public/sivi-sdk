@@ -5,15 +5,17 @@ const IFRAME_CONTAINER_ID = 'sivi-container'
 const defaultOptions = {
   type: "custom",
   subtype: "custom",
-  width: 1080,
-  height: 1080,
+  dimension: {
+    width: 1080,
+    height: 1080
+  },
   prompt: "Create a modern social media post for a coffee restaurant",
   language: "english",
   colors: ["#5662EC", "#EF9AB2"],
   numOfVariants: 3,
-  outputFormats: "png",
+  outputFormat: "png",
   config: {
-    enableLoginUI: true,
+    enableLoginUI: true, // For Standard SDK will be always true
     enableDesignEditor: true,
   }
 }
