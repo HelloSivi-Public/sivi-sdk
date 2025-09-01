@@ -1,6 +1,6 @@
 export const designPresets = {
-  textOnly: {
-    name: "Simple Text Only",
+  simple: {
+    name: "Simple",
     data: {
       type: 'amazon',
       subtype: 'amazon-square',
@@ -8,7 +8,7 @@ export const designPresets = {
         width: 300,
         height: 300
       },
-      prompt: 'Gomti Aluminimum Foil - for all your needs. Explore Options',
+      prompt: 'Get Free POS Development with your landing page. Claim Now',
       assets: {
         images: [],
         logos: []
@@ -16,7 +16,7 @@ export const designPresets = {
       colors: [],
       fonts: [],
       language: 'english',
-      numOfVariants: 2,
+      numOfVariants: 3,
       outputFormat: ['jpg']
     }
   },
