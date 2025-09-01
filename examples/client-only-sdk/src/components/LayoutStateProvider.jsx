@@ -36,16 +36,17 @@ export const LayoutStateProvider = ({ children, registerEventHandler, openDesign
           if (selectedVisualRef.current) {
             const URL = event.data.variantImageUrl + '?timestamp=' + Date.now()
             const variantId = event.data.variantId
+            const variantType = event.data.variantType
             
             // Store variant ID mapping per image URL
             setImageVariantMap(prev => ({
               ...prev,
-              [URL]: variantId
+              [URL]: { variantId, variantType }
             }))
             
             setVisualShapes(prev => ({
               ...prev,
-              [selectedVisualRef.current]: { imageUrl: URL, variantId }
+              [selectedVisualRef.current]: { imageUrl: URL, variantId, variantType }
             }))
 
             // Celebrate with confetti effect
@@ -70,9 +71,10 @@ export const LayoutStateProvider = ({ children, registerEventHandler, openDesign
 
   // Handle edit image functionality
   const handleEditImage = React.useCallback((imageUrl) => {
-    const variantId = imageVariantMap[imageUrl]
+    const variantId = imageVariantMap[imageUrl].variantId
+    const variantType = imageVariantMap[imageUrl].variantType
     if (variantId && openDesignVariantEditor) {
-      openDesignVariantEditor({ variantId })
+      openDesignVariantEditor({ variantId, variantType })
     }
   }, [imageVariantMap, openDesignVariantEditor])
 
