@@ -3,9 +3,8 @@
   flex: 0 0 30%;
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.05);
+  background: #000000;
   border-radius: 12px;
-  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   max-height: 30vh;
   overflow: hidden;
@@ -25,9 +24,9 @@
 }
 
 .tab-button {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
   padding: 8px 16px;
   font-size: 14px;
@@ -37,20 +36,20 @@
 }
 
 .tab-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .tab-button.active {
-  background: rgba(86, 98, 236, 0.3);
-  color: #fff;
-  border-color: rgba(86, 98, 236, 0.5);
+  background: rgba(86, 98, 236, 0.4);
+  color: #ffffff;
+  border-color: rgba(86, 98, 236, 0.6);
 }
 
 .clear-logs-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
   padding: 8px 16px;
   font-size: 12px;
@@ -60,7 +59,7 @@
 }
 
 .clear-logs-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .clear-logs-btn:disabled {
@@ -87,12 +86,13 @@
 .input-content {
   flex: 1;
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 6px;
   padding: 12px;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 12px;
   line-height: 1.4;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .logs-content {
@@ -112,16 +112,16 @@
 }
 
 .log-timestamp {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   flex-shrink: 0;
 }
 
 .log-message {
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
 }
 
 .response-json {
-  color: #fff;
+  color: #ffffff;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 11px;
   line-height: 1.4;
@@ -135,7 +135,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
@@ -155,13 +155,14 @@
 .input-json {
   flex: 1;
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .input-json pre {
-  color: #fff;
+  color: #ffffff;
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 11px;
   line-height: 1.4;
