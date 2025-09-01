@@ -68,7 +68,7 @@ const DesignForm = ({ onSubmit, initialData }) => {
   const addColor = () => {
     setFormData(prev => ({
       ...prev,
-      colors: [...prev.colors, '#000000']
+      colors: [...prev.colors, '#bb3df5']
     }));
   };
 

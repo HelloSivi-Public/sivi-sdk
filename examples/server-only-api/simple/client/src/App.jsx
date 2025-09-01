@@ -1,20 +1,73 @@
 import './App.css'
 import React, { useState } from 'react'
 import DesignForm from './components/DesignForm'
+import ApiMonitor from './components/ApiMonitor'
 import { designPresets } from './presets/designPresets'
 
 function App() {
   const [selectedPreset, setSelectedPreset] = useState('');
   const [formKey, setFormKey] = useState(0);
+  const [apiResponse, setApiResponse] = useState(null);
+  const [apiLogs, setApiLogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [designVariants, setDesignVariants] = useState([]);
 
-  const handleFormSubmit = (formData) => {
-    console.log('Form submitted with data:', formData);
-    // Here you would typically send the data to your API
+  const addLog = (message) => {
+    const timestamp = new Date().toLocaleTimeString();
+    setApiLogs(prev => [...prev, { timestamp, message }]);
+  };
+
+  const handleFormSubmit = async (formData) => {
+    setIsLoading(true);
+    setApiResponse(null);
+    setDesignVariants([]);
+    
+    const startTime = Date.now();
+    addLog('Starting API call to /designs-from-prompt');
+    
+    try {
+      const response = await fetch('http://localhost:4000/designs-from-prompt', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      const endTime = Date.now();
+      const timeTaken = endTime - startTime;
+      
+      const data = await response.json();
+      
+      addLog(`API call completed in ${timeTaken}ms`);
+      addLog(`Response status: ${response.status}`);
+      
+      setApiResponse(data);
+      
+      if (data.status === 200 && data.body?.designId) {
+        addLog(`Design generated successfully. Design ID: ${data.body.designId}`);
+        // You can add logic here to fetch variants if needed
+      } else {
+        addLog('Design generation failed or returned error');
+      }
+    } catch (error) {
+      const endTime = Date.now();
+      const timeTaken = endTime - startTime;
+      addLog(`API call failed after ${timeTaken}ms: ${error.message}`);
+      setApiResponse({ error: error.message });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handlePresetChange = (presetKey) => {
     setSelectedPreset(presetKey);
     setFormKey(prev => prev + 1); // Force form re-render with new preset
+  };
+
+  const handleClearLogs = () => {
+    setApiLogs([]);
+    setApiResponse(null);
   };
 
   return (
@@ -51,7 +104,32 @@ function App() {
         </aside>
         
         <main className="main-content">
-          <p>Design will be generated here</p>
+          <div className="variants-section">
+            <h2>Design Variants</h2>
+            {isLoading ? (
+              <div className="loading-state">
+                <p>Generating design...</p>
+              </div>
+            ) : designVariants.length > 0 ? (
+              <div className="variants-grid">
+                {designVariants.map((variant, index) => (
+                  <div key={index} className="variant-item">
+                    <img src={variant.url} alt={`Variant ${index + 1}`} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <p>Design variants will appear here after generation</p>
+              </div>
+            )}
+          </div>
+          
+          <ApiMonitor 
+            apiLogs={apiLogs}
+            apiResponse={apiResponse}
+            onClearLogs={handleClearLogs}
+          />
         </main>
       </div>
     </div>

@@ -16,8 +16,11 @@ app.use(express.json()); // Parse JSON bodies
 app.post('/designs-from-prompt', (req, res) => {
 
     console.time('designs-from-prompt')
+    // console.log('designs-from-prompt')
+    // console.log(process.env.SIVI_API_URL)
+    // console.log(req.body)
 
-    fetch(`${process.env.SIVI_API_URL}/designs-from-prompt`, {
+    fetch(`${process.env.SIVI_API_URL}/general/designs-from-prompt`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -28,9 +31,11 @@ app.post('/designs-from-prompt', (req, res) => {
         .then(response => {
             console.timeEnd('designs-from-prompt')
             return response.json()
-        }
-        )
-        .then(data => res.json(data))
+        })
+        .then(data => {
+            console.log(data)
+            res.json(data)
+        })
         .catch(error => {
             console.error('Error:', error);
             console.timeEnd('designs-from-prompt')
