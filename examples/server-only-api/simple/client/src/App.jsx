@@ -1,9 +1,10 @@
 import './App.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DesignForm from './components/DesignForm'
 import ApiMonitor from './components/ApiMonitor'
 import { designPresets } from './presets/designPresets'
 import { getDimensionFromInput } from './utils/dimensionMapping'
+import { saveToHistory, getHistory, getHistoryItem, formatHistoryLabel } from './utils/historyStorage'
 
 function App() {
   const [selectedPreset, setSelectedPreset] = useState('');
@@ -14,35 +15,40 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [designVariants, setDesignVariants] = useState([]);
   const [isPolling, setIsPolling] = useState(false);
+  const [history, setHistory] = useState([]);
+  const [selectedHistoryId, setSelectedHistoryId] = useState('');
+
+  useEffect(() => {
+    setHistory(getHistory());
+  }, []);
 
   const addLog = (message) => {
     const timestamp = new Date().toLocaleTimeString();
     setApiLogs(prev => [...prev, { timestamp, message }]);
   };
 
-  const pollDesignStatus = async (requestId, pollCount = 0) => {
+  const pollDesignStatus = async (requestId, pollCount = 0, originalApiInput = null, allLogs = []) => {
     try {
-      addLog(`Polling design status (attempt ${pollCount + 1})...`);
+      const pollingLog = { timestamp: new Date().toLocaleTimeString(), message: `Polling design status (attempt ${pollCount + 1})...` };
+      addLog(pollingLog.message);
+      allLogs.push(pollingLog);
       
       const response = await fetch(`http://localhost:4000/get-request-status?requestId=${requestId}`);
       const data = await response.json();
       
-      addLog(`Status check response: ${data.body?.status || 'unknown'}`);
+      const statusLog = { timestamp: new Date().toLocaleTimeString(), message: `Status check response: ${data.body?.status || 'unknown'}` };
+      addLog(statusLog.message);
+      allLogs.push(statusLog);
       
-      // Append all polling responses to track progress
-      setApiResponse(prev => {
-        if (prev) {
-          return {
-            ...prev,
-            latestResponse: data,
-            allResponses: [...(prev.allResponses || [prev]), data]
-          };
-        }
-        return data;
-      });
+      // Only update apiResponse if this is the final completed response
+      if (data.status === 200 && data.body?.status === 'completed') {
+        setApiResponse(data);
+      }
       
       if (data.status === 200 && data.body?.status === 'completed') {
-        addLog('Design generation completed!');
+        const completedLog = { timestamp: new Date().toLocaleTimeString(), message: 'Design generation completed!' };
+        addLog(completedLog.message);
+        allLogs.push(completedLog);
         setIsPolling(false);
         setIsLoading(false);
         
@@ -53,7 +59,22 @@ function App() {
             editLink: variant.variantEditLink
           }));
           setDesignVariants(variants);
-          addLog(`Found ${variants.length} design variants`);
+          
+          const variantsLog = { timestamp: new Date().toLocaleTimeString(), message: `Found ${variants.length} design variants` };
+          addLog(variantsLog.message);
+          allLogs.push(variantsLog);
+          
+          // Save to history with all accumulated logs
+          const inputToSave = originalApiInput || apiInput;
+          console.log('Attempting to save to history:', { inputToSave, data, allLogs, variants });
+          const historyId = saveToHistory(inputToSave, data, allLogs, variants);
+          console.log('History save result:', historyId);
+          if (historyId) {
+            setHistory(getHistory());
+            addLog('Saved to history');
+          } else {
+            addLog('Failed to save to history');
+          }
         }
         
         return;
@@ -61,7 +82,9 @@ function App() {
       
       // Stop polling if there's an error status
       if (data.status !== 200) {
-        addLog(`API error: Status ${data.status}. Stopping polling.`);
+        const errorLog = { timestamp: new Date().toLocaleTimeString(), message: `API error: Status ${data.status}. Stopping polling.` };
+        addLog(errorLog.message);
+        allLogs.push(errorLog);
         setIsPolling(false);
         setIsLoading(false);
         return;
@@ -69,7 +92,9 @@ function App() {
       
       // Stop polling if status indicates failure
       if (data.body?.status === 'failed' || data.body?.status === 'error') {
-        addLog(`Design generation failed: ${data.body?.status}. Stopping polling.`);
+        const failedLog = { timestamp: new Date().toLocaleTimeString(), message: `Design generation failed: ${data.body?.status}. Stopping polling.` };
+        addLog(failedLog.message);
+        allLogs.push(failedLog);
         setIsPolling(false);
         setIsLoading(false);
         return;
@@ -85,10 +110,12 @@ function App() {
         nextDelay = 10000; // 10 seconds for subsequent polls
       }
       
-      addLog(`Next status check in ${nextDelay/1000} seconds...`);
+      const nextCheckLog = { timestamp: new Date().toLocaleTimeString(), message: `Next status check in ${nextDelay/1000} seconds...` };
+      addLog(nextCheckLog.message);
+      allLogs.push(nextCheckLog);
       
       setTimeout(() => {
-        pollDesignStatus(requestId, pollCount + 1);
+        pollDesignStatus(requestId, pollCount + 1, originalApiInput, allLogs);
       }, nextDelay);
       
     } catch (error) {
@@ -124,16 +151,7 @@ function App() {
       addLog(`API call completed in ${timeTaken}ms`);
       addLog(`Response status: ${response.status}`);
       
-      setApiResponse(prev => {
-        if (prev) {
-          return {
-            ...prev,
-            latestResponse: data,
-            allResponses: [...(prev.allResponses || [prev]), data]
-          };
-        }
-        return data;
-      });
+      setApiResponse(data);
       
       if (data.status === 200 && data.body?.requestId) {
         addLog(`Design request queued. Request ID: ${data.body.requestId}`);
@@ -142,9 +160,11 @@ function App() {
         setIsPolling(true);
         
         // Start polling after initial delay
-        addLog('Starting status polling in 5 seconds...');
+        const pollingStartLog = { timestamp: new Date().toLocaleTimeString(), message: 'Starting status polling in 5 seconds...' };
+        addLog(pollingStartLog.message);
+        const initialLogs = [...apiLogs, pollingStartLog];
         setTimeout(() => {
-          pollDesignStatus(data.body.requestId, 0);
+          pollDesignStatus(data.body.requestId, 0, formData, initialLogs);
         }, 5000);
         
       } else {
@@ -165,6 +185,7 @@ function App() {
 
   const handlePresetChange = (presetKey) => {
     setSelectedPreset(presetKey);
+    setSelectedHistoryId(''); // Clear history selection when preset is selected
     setFormKey(prev => prev + 1); // Force form re-render with new preset
   };
 
@@ -176,25 +197,64 @@ function App() {
     setIsPolling(false);
   };
 
+  const handleHistorySelect = (historyId) => {
+    if (!historyId) {
+      setSelectedHistoryId('');
+      setSelectedPreset(''); // Clear preset selection
+      return;
+    }
+
+    const historyItem = getHistoryItem(historyId);
+    if (historyItem) {
+      setSelectedHistoryId(historyId);
+      setSelectedPreset(''); // Clear preset selection when history is selected
+      setApiInput(historyItem.apiInput);
+      setApiResponse(historyItem.apiResponse);
+      setApiLogs(historyItem.apiLogs || []);
+      setDesignVariants(historyItem.designVariants || []);
+      setFormKey(prev => prev + 1); // Force form re-render with history data
+      addLog(`Loaded history: ${historyItem.prompt.substring(0, 50)}...`);
+    }
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
         <h1>Marketing Campaign</h1>
-        <div className="preset-selector">
-          <label htmlFor="preset-dropdown" className="preset-label">Load Example:</label>
-          <select 
-            id="preset-dropdown"
-            value={selectedPreset}
-            onChange={(e) => handlePresetChange(e.target.value)}
-            className="preset-dropdown"
-          >
-            <option value="">Select a preset...</option>
-            {Object.entries(designPresets).map(([key, preset]) => (
-              <option key={key} value={key}>
-                {preset.name}
-              </option>
-            ))}
-          </select>
+        <div className="header-controls">
+          <div className="preset-selector">
+            <label htmlFor="preset-dropdown" className="preset-label">Load Example:</label>
+            <select 
+              id="preset-dropdown"
+              value={selectedPreset}
+              onChange={(e) => handlePresetChange(e.target.value)}
+              className="preset-dropdown"
+            >
+              <option value="">Select a preset...</option>
+              {Object.entries(designPresets).map(([key, preset]) => (
+                <option key={key} value={key}>
+                  {preset.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="history-selector">
+            <label htmlFor="history-dropdown" className="preset-label">History:</label>
+            <select 
+              id="history-dropdown"
+              value={selectedHistoryId}
+              onChange={(e) => handleHistorySelect(e.target.value)}
+              className="preset-dropdown"
+            >
+              <option value="">Select from history...</option>
+              {history.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {formatHistoryLabel(item)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </header>
       
@@ -204,7 +264,7 @@ function App() {
             <DesignForm 
               key={formKey}
               onSubmit={handleFormSubmit} 
-              initialData={selectedPreset ? designPresets[selectedPreset].data : null}
+              initialData={selectedPreset ? designPresets[selectedPreset].data : (selectedHistoryId ? getHistoryItem(selectedHistoryId)?.apiInput : null)}
             />
           </div>
         </aside>

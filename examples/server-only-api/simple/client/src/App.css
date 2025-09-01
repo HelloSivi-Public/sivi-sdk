@@ -38,7 +38,14 @@ body {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
-.preset-selector {
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.preset-selector,
+.history-selector {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -272,6 +279,21 @@ body {
 @media (max-width: 1024px) {
   .app-content {
     flex-direction: column;
+  }
+  
+  .header-controls {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+  
+  .preset-selector,
+  .history-selector {
+    gap: 8px;
+  }
+  
+  .preset-dropdown {
+    min-width: 160px;
   }
   
   .sidebar {

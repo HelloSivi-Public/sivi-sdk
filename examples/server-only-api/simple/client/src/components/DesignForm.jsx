@@ -34,6 +34,13 @@ const DesignForm = ({ onSubmit, initialData }) => {
 
   const [formData, setFormData] = useState(initialData || defaultFormData);
 
+  // Update form data when initialData changes (for history loading)
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
+
   // Update dimensions when type/subtype changes
   useEffect(() => {
     if (!requiresCustomDimensions(formData.type, formData.subtype)) {
