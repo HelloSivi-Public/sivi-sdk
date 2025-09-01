@@ -5,8 +5,7 @@ export const designTypes = {
     subtypes: {
       "instagram-post": { label: "Post (1080×1080)", width: 1080, height: 1080 },
       "instagram-post-small": { label: "Post Small (800×800)", width: 800, height: 800 },
-      "instagram-ad": { label: "Ad (1080×1080)", width: 1080, height: 1080 },
-      "Instagram-story": { label: "Story (1080×1920)", width: 1080, height: 1920 }
+      "instagram-ad": { label: "Ad (1080×1080)", width: 1080, height: 1080 }
     }
   },
   
@@ -33,7 +32,6 @@ export const designTypes = {
     subtypes: {
       "linkedIn-post": { label: "Post (1200×628)", width: 1200, height: 628 },
       "linkedIn-ad": { label: "Ad (1080×1080)", width: 1080, height: 1080 },
-      "linkedIn-cover": { label: "Cover (1128×191)", width: 1128, height: 191 },
       "linkedIn-banner": { label: "Banner (1584×396)", width: 1584, height: 396 }
     }
   },
@@ -41,8 +39,7 @@ export const designTypes = {
   pinterest: {
     label: "Pinterest",
     subtypes: {
-      "pinterest-pin-small": { label: "Pin Small (400×600)", width: 400, height: 600 },
-      "pinterest-std-pin": { label: "Standard Pin (600×900)", width: 600, height: 900 }
+      "pinterest-pin-small": { label: "Pin Small (400×600)", width: 400, height: 600 }
     }
   },
   
@@ -51,7 +48,6 @@ export const designTypes = {
     subtypes: {
       "whatsapp-post": { label: "Post (800×800)", width: 800, height: 800 },
       "whatsapp-wide-post": { label: "Wide Post (800×400)", width: 800, height: 400 },
-      "whatsapp-status": { label: "Status (1080×1920)", width: 1080, height: 1920 },
       "whatsapp-business-cover": { label: "Business Cover (1211×681)", width: 1211, height: 681 }
     }
   },
@@ -59,7 +55,8 @@ export const designTypes = {
   youtube: {
     label: "YouTube",
     subtypes: {
-      "youtube-thumbnail": { label: "Thumbnail (1280×720)", width: 1280, height: 720 }
+      "youtube-thumbnail-small": { label: "Thumbnail (640x360)", width: 640, height: 360 },
+      "youtube-shorts-thumbnail-small": { label: "Shorts Thumbnail (540×960)", width: 540, height: 960 },
     }
   },
   
@@ -71,20 +68,9 @@ export const designTypes = {
       "displayAds-half-page-ad": { label: "Half Page Ad (300×600)", width: 300, height: 600 },
       "displayAds-large-rectangle": { label: "Large Rectangle (336×280)", width: 336, height: 280 },
       "displayAds-inline-rectangle": { label: "Inline Rectangle (300×250)", width: 300, height: 250 },
-      "displayAds-square": { label: "Square (250×250)", width: 250, height: 250 },
-      "displayAds-small-square": { label: "Small Square (200×200)", width: 200, height: 200 },
       
       // Skyscraper Display Ads
-      "displayAds-skyscraper": { label: "Skyscraper (120×600)", width: 120, height: 600 },
-      "displayAds-fat-skyscraper": { label: "Fat Skyscraper (240×400)", width: 240, height: 400 },
-      "displayAds-wide-skyscraper": { label: "Wide Skyscraper (160×600)", width: 160, height: 600 },
-      "displayAds-small-skyscraper": { label: "Small Skyscraper (120×240)", width: 120, height: 240 },
-      
-      // Horizontal Display Ads
-      "displayAds-leaderboard": { label: "Leaderboard (728×90)", width: 728, height: 90 },
-      "displayAds-mobile-leaderboard": { label: "Mobile Leaderboard (320×50)", width: 320, height: 50 },
-      "displayAds-large-leaderboard": { label: "Large Leaderboard (970×90)", width: 970, height: 90 },
-      "displayAds-banner": { label: "Banner (468×60)", width: 468, height: 60 }
+      "displayAds-fat-skyscraper": { label: "Fat Skyscraper (240×400)", width: 240, height: 400 }
     }
   },
   
@@ -93,14 +79,10 @@ export const designTypes = {
     label: "Amazon",
     subtypes: {
       "amazon-ad": { label: "Ad (300×250)", width: 300, height: 250 },
-      "amazon-one-third": { label: "One Third (1500×300)", width: 1500, height: 300 },
       "amazon-fullscreen": { label: "Fullscreen (727×356)", width: 727, height: 356 },
       "amazon-large-square": { label: "Large Square (727×727)", width: 727, height: 727 },
       "amazon-rectangle": { label: "Rectangle (970×600)", width: 970, height: 600 },
-      "amazon-standard": { label: "Standard (970×300)", width: 970, height: 300 },
-      "amazon-square": { label: "Square (300×300)", width: 300, height: 300 },
-      "amazon-small-square": { label: "Small Square (220×220)", width: 220, height: 220 },
-      "amazon-fullscreen-HD": { label: "Fullscreen HD (1920×1080)", width: 1920, height: 1080 }
+      "amazon-square": { label: "Square (300×300)", width: 300, height: 300 }
     }
   },
   
@@ -116,11 +98,7 @@ export const designTypes = {
       "website-square": { label: "Square (450×450)", width: 450, height: 450 },
       "website-small-square": { label: "Small Square (300×300)", width: 300, height: 300 },
       "website-large-square": { label: "Large Square (600×600)", width: 600, height: 600 },
-      "website-fullscreen-HD": { label: "Fullscreen HD (1920×1080)", width: 1920, height: 1080 },
-      "website-half-page": { label: "Half Page (1600×450)", width: 1600, height: 450 },
-      "website-one-third": { label: "One Third (1600×300)", width: 1600, height: 300 },
-      "website-standard": { label: "Standard (1280×400)", width: 1280, height: 400 },
-      "website-hello-bar": { label: "Hello Bar (1280×100)", width: 1280, height: 100 }
+      "website-standard": { label: "Standard (1280×400)", width: 1280, height: 400 }
     }
   },
   

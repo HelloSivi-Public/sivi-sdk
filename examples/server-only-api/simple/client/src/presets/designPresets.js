@@ -1,19 +1,19 @@
 export const designPresets = {
-  simple: {
-    name: "Simple",
+  textOnly: {
+    name: "Simple Text Only",
     data: {
-      type: 'displayAds',
-      subtype: 'displayAds-half-page-ad',
+      type: 'amazon',
+      subtype: 'amazon-square',
       dimension: {
         width: 300,
-        height: 600
+        height: 300
       },
-      prompt: 'Create a clean and simple advertisement',
+      prompt: 'Gomti Aluminimum Foil - for all your needs. Explore Options',
       assets: {
         images: [],
         logos: []
       },
-      colors: ['#5662EC'],
+      colors: [],
       fonts: [],
       language: 'english',
       numOfVariants: 2,
@@ -21,73 +21,16 @@ export const designPresets = {
     }
   },
   
-  contentOnly: {
-    name: "Content Only",
-    data: {
-      type: 'displayAds',
-      subtype: 'displayAds-banner',
-      dimension: {
-        width: 728,
-        height: 90
-      },
-      prompt: 'Create a text-focused banner with compelling copy and minimal visual elements',
-      assets: {
-        images: [],
-        logos: []
-      },
-      colors: ['#2563EB', '#F59E0B'],
-      fonts: [],
-      language: 'english',
-      numOfVariants: 3,
-      outputFormat: ['jpg']
-    }
-  },
-  
   ecommerceProduct: {
     name: "E-commerce Product",
     data: {
-      type: 'displayAds',
-      subtype: 'displayAds-square',
+      type: 'amazon',
+      subtype: 'amazon-fullscreen',
       dimension: {
-        width: 500,
-        height: 500
+        width: 727,
+        height: 356
       },
-      prompt: 'Create a product showcase ad highlighting features and benefits with a clear call-to-action',
-      assets: {
-        images: [
-          {
-            url: 'https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg',
-            imagePreference: {
-              crop: true,
-              removeBg: false
-            }
-          }
-        ],
-        logos: [
-          {
-            url: 'https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png',
-            logoStyles: ['direct']
-          }
-        ]
-      },
-      colors: ['#DC2626', '#FFFFFF', '#1F2937'],
-      fonts: [],
-      language: 'english',
-      numOfVariants: 4,
-      outputFormat: ['jpg']
-    }
-  },
-  
-  ecommerceCategory: {
-    name: "E-commerce Category",
-    data: {
-      type: 'displayAds',
-      subtype: 'displayAds-banner',
-      dimension: {
-        width: 1200,
-        height: 300
-      },
-      prompt: 'Create a category banner showcasing multiple products with seasonal theme and promotional messaging',
+      prompt: 'Promote Men’s Summer Graphic Tee – Sunrise & Waves Print. Specifications: - Color: White with multicolor print, Material: 100% Cotton, Neckline: Crew neck',
       assets: {
         images: [
           {
@@ -101,11 +44,48 @@ export const designPresets = {
         logos: [
           {
             url: 'https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png',
-            logoStyles: ['outline']
+            logoStyles: ['direct']
           }
         ]
       },
-      colors: ['#059669', '#F3F4F6', '#111827'],
+      colors: ['#F9A737', '#5DB8D3', '#2970B8'],
+      fonts: [],
+      language: 'english',
+      numOfVariants: 3,
+      outputFormat: ['jpg']
+    }
+  },
+  
+  ecommerceCategory: {
+    name: "E-commerce Category",
+    data: {
+      type: 'website',
+      subtype: 'website-large-square',
+      dimension: {
+        width: 600,
+        height: 600
+      },
+      prompt: 'Naturally Luxurious Skincare. Experience the Skirpro difference today. View Collection',
+      assets: {
+        images: [
+          {
+            url: 'https://media.hellosivi.com/system/generated-images/SDS-1/cluys6nvb036ws6016bd2o1l6.jpg',
+            imagePreference: {
+              crop: true,
+              removeBg: false
+            }
+          },
+          {
+            url: 'https://media.hellosivi.com/system/generated-images/SDS-1/cltx4tx35095bs601fsiqc3b3.jpg',
+            imagePreference: {
+              crop: true,
+              removeBg: false
+            }
+          }
+        ],
+        logos: []
+      },
+      colors: ['#668135', '#D6DEC1', '#0E1A01'],
       fonts: [],
       language: 'english',
       numOfVariants: 3,
@@ -116,17 +96,17 @@ export const designPresets = {
   socialMedia: {
     name: "Social Media",
     data: {
-      type: 'socialMedia',
-      subtype: 'instagram-post',
+      type: 'twitter',
+      subtype: 'twitter-post',
       dimension: {
-        width: 1080,
-        height: 1080
+        width: 1024,
+        height: 512
       },
-      prompt: 'Create an engaging social media post with trendy design elements and hashtag-friendly content',
+      prompt: 'Title: Bask in the Sun, Subtext: Let natural light flood your space with our designs., Button: Get a Quote',
       assets: {
         images: [
           {
-            url: 'https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg',
+            url: 'https://media.hellosivi.com/system/generated-images/SDS-1/clu35q9el07its601ntv8ljji.jpg',
             imagePreference: {
               crop: true,
               removeBg: false
@@ -135,10 +115,10 @@ export const designPresets = {
         ],
         logos: []
       },
-      colors: ['#E11D48', '#F59E0B', '#FFFFFF'],
+      colors: ['#00B8A4', '#0F555F', '#FFFFFF'],
       fonts: [],
       language: 'english',
-      numOfVariants: 5,
+      numOfVariants: 3,
       outputFormat: ['jpg']
     }
   },
@@ -152,20 +132,88 @@ export const designPresets = {
         width: 300,
         height: 600
       },
-      prompt: 'Create a brand awareness campaign focusing on company values and brand personality with emotional appeal',
+      prompt: 'Navigating Real Estate, Simplified. Your trusted partner for buying and selling property. Learn More',
       assets: {
-        images: [],
+        images: [
+          {
+            url: 'https://images.unsplash.com/photo-1649083048770-82e8ffd80431?ixid=M3wzMzc5NnwwfDF8c2VhcmNofDExfHxtb2Rlcm4lMjBkZXNpZ258ZW58MHx8fHwxNzUzOTg4OTQ5fDA',
+            imagePreference: {
+              crop: true,
+              removeBg: false
+            }
+          }
+        ],
         logos: [
           {
-            url: 'https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png',
-            logoStyles: ['direct', 'outline']
+            url: 'https://media.hellosivi.com/logos/snH2sMMwKoN.png',
+            logoStyles: ['direct', 'neutral']
           }
         ]
       },
-      colors: ['#7C3AED', '#EC4899', '#F59E0B'],
+      colors: ['#C31E2E', '#FFF3ED', '#000000'],
       fonts: [],
       language: 'english',
       numOfVariants: 4,
+      outputFormat: ['jpg']
+    }
+  },
+  
+  videoThumbnail: {
+    name: "Video Thumbnail",
+    data: {
+      type: 'youtube',
+      subtype: 'youtube-thumbnail-small',
+      dimension: {
+        width: 640,
+        height: 360
+      },
+      prompt: 'Thumbnails for money management videos',
+      assets: {
+        images: [
+          {
+            url: 'https://media.hellosivi.com/system/generated-images/sivi/28e41b71680414c04f6d562ffd041cd2.jpeg',
+            imagePreference: {
+              crop: true,
+              removeBg: false
+            }
+          }
+        ],
+        logos: []
+      },
+      colors: [],
+      fonts: [],
+      language: 'english',
+      numOfVariants: 4,
+      outputFormat: ['jpg']
+    }
+  },
+  
+  profileCover: {
+    name: "Profile Cover",
+    data: {
+      type: 'facebook',
+      subtype: 'facebook-cover',
+      dimension: {
+        width: 851,
+        height: 315
+      },
+      prompt: 'Best Movie Clips. Discover unforgettable moments in cinema history.',
+      assets: {
+        images: [
+          {
+            url: 'https://media.hellosivi.com/system/generated-images/sivi/d5a97d88c94a687320e4efaee0c4eccd.jpeg',
+            imagePreference: {
+              crop: true,
+              removeBg: false
+            }
+          }
+        ],
+        logos: []
+      },
+      colors: [],
+      fonts: [],
+      language: 'english',
+      numOfVariants: 3,
       outputFormat: ['jpg']
     }
   }
