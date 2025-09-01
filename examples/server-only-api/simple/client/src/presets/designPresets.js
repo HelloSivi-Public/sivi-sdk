@@ -21,41 +21,6 @@ export const designPresets = {
     }
   },
   
-  ecommerceProduct: {
-    name: "E-commerce Product",
-    data: {
-      type: 'amazon',
-      subtype: 'amazon-fullscreen',
-      dimension: {
-        width: 727,
-        height: 356
-      },
-      prompt: 'Promote Men’s Summer Graphic Tee – Sunrise & Waves Print. Specifications: - Color: White with multicolor print, Material: 100% Cotton, Neckline: Crew neck',
-      assets: {
-        images: [
-          {
-            url: 'https://images.hellosivi.com/fit-in/800x800/photos/sKN0gtrFJn4.jpg',
-            imagePreference: {
-              crop: true,
-              removeBg: true
-            }
-          }
-        ],
-        logos: [
-          {
-            url: 'https://images.hellosivi.com/fit-in/200x200/logos/sLkA1TkxN67.png',
-            logoStyles: ['direct']
-          }
-        ]
-      },
-      colors: ['#F9A737', '#5DB8D3', '#2970B8'],
-      fonts: [],
-      language: 'english',
-      numOfVariants: 3,
-      outputFormat: ['jpg']
-    }
-  },
-  
   ecommerceCategory: {
     name: "E-commerce Category",
     data: {
@@ -65,7 +30,7 @@ export const designPresets = {
         width: 600,
         height: 600
       },
-      prompt: 'Naturally Luxurious Skincare. Experience the Skirpro difference today. View Collection',
+      prompt: 'Naturally Luxurious Skincare. Experience the Skinpro difference today. View Collection',
       assets: {
         images: [
           {
@@ -115,7 +80,7 @@ export const designPresets = {
         ],
         logos: []
       },
-      colors: ['#00B8A4', '#0F555F', '#FFFFFF'],
+      colors: ['#00B8A4', '#0679AB', '#FFFFFF'],
       fonts: [],
       language: 'english',
       numOfVariants: 3,
@@ -150,7 +115,7 @@ export const designPresets = {
           }
         ]
       },
-      colors: ['#C31E2E', '#FFF3ED', '#000000'],
+      colors: ['#C31E2E'],
       fonts: [],
       language: 'english',
       numOfVariants: 4,
