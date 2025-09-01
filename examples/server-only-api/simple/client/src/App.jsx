@@ -271,7 +271,7 @@ function App() {
         
         <main className="main-content">
           <div className="variants-section">
-            <h2>Design Variants</h2>
+            <h2>Generated Design Variations</h2>
             {isLoading || isPolling ? (
               <div className="loading-state">
                 {isPolling ? (
@@ -319,7 +319,7 @@ function App() {
                 })}
               </div>
             ) : (
-              <div className="empty-state">
+              <div className="variant-empty-state">
                 <p>Design variants will appear here after generation</p>
               </div>
             )}

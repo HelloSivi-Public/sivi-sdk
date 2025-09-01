@@ -28,14 +28,15 @@ body {
 .app-header {
   width: 100%;
   height: 64px;
-  background: rgba(255, 255, 255, 0);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(86, 98, 236, 1);
+  background: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 20;
 }
 
 .header-controls {
@@ -206,16 +207,28 @@ body {
 
 .variants-section h2 {
   color: #333;
-  margin: 0 0 20px 0;
-  font-size: 20px;
-  font-weight: 600;
+  margin: 20px 0 20px 0;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.variant-empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 16px;
 }
 
 .loading-state, .empty-state {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: 300px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 16px;
 }

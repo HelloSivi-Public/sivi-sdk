@@ -36,7 +36,7 @@
 }
 
 .form-textarea {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   color: #333;
   min-height: 120px;
   resize: vertical;
@@ -145,7 +145,7 @@
   padding: 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   position: relative;
   width: 100%;
   box-sizing: border-box;
