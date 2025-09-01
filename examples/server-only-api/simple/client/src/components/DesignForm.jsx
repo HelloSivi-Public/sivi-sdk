@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './FormComponents.css';
 import {
   TextInput,
+  TextAreaInput,
   NumberInput,
   SelectInput,
   MultiSelectList,
@@ -23,7 +24,7 @@ const DesignForm = ({ onSubmit }) => {
       images: [],
       logos: []
     },
-    colors: ['#5662EC'],
+    colors: [],
     fonts: [],
     language: 'english',
     numOfVariants: 4,
@@ -115,7 +116,7 @@ const DesignForm = ({ onSubmit }) => {
         onChange={(url) => onChange({ ...logo, url })}
         placeholder="https://example.com/logo.png"
       />
-      <MultiSelectList
+      {/* <MultiSelectList
         label="Logo Styles"
         values={logo.logoStyles || []}
         onChange={(styles) => onChange({ ...logo, logoStyles: styles })}
@@ -125,7 +126,7 @@ const DesignForm = ({ onSubmit }) => {
           { value: 'shadow', label: 'Shadow' },
           { value: 'embossed', label: 'Embossed' }
         ]}
-      />
+      /> */}
     </div>
   );
 
@@ -173,11 +174,12 @@ const DesignForm = ({ onSubmit }) => {
         />
       </div>
 
-      <TextInput
+      <TextAreaInput
         label="Prompt"
         value={formData.prompt}
         onChange={(value) => updateField('prompt', value)}
         placeholder="Describe your design requirements..."
+        rows={6}
       />
 
       <DynamicList
@@ -205,7 +207,7 @@ const DesignForm = ({ onSubmit }) => {
                 value={color}
                 onChange={(newColor) => updateColor(index, newColor)}
               />
-              {formData.colors.length > 1 && (
+              {formData.colors.length > 0 && (
                 <button
                   type="button"
                   onClick={() => removeColor(index)}
@@ -242,17 +244,15 @@ const DesignForm = ({ onSubmit }) => {
         max={10}
       />
 
-      <MultiSelectList
+      {/* <MultiSelectList
         label="Output Format"
         values={formData.outputFormat}
         onChange={(formats) => updateField('outputFormat', formats)}
         options={[
           { value: 'jpg', label: 'JPG' },
           { value: 'png', label: 'PNG' },
-          { value: 'pdf', label: 'PDF' },
-          { value: 'svg', label: 'SVG' }
         ]}
-      />
+      /> */}
 
       <button type="submit" className="ai-studio-button">
         Generate Design

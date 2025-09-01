@@ -56,14 +56,14 @@ body {
 /* Sidebar */
 .sidebar {
   width: clamp(360px, 32vw, 380px);
-  height: auto; /* grow with content instead of constraining */
+  height: calc(100vh - 64px); /* fixed height based on viewport */
   background: rgba(255, 255, 255, 0);
   backdrop-filter: blur(10px);
   border-right: 1px solid rgba(86, 98, 236, 0.5);
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
-  overflow-y: visible; /* avoid clipping; page scrolls instead */
+  overflow-y: auto; /* enable scrolling when content overflows */
 }
 
 .control-panel {

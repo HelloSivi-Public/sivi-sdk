@@ -155,6 +155,22 @@ export const DynamicList = ({ label, items, onChange, renderItem, addButtonText 
   );
 };
 
+// Textarea input component
+export const TextAreaInput = ({ label, value, onChange, placeholder, rows = 4 }) => {
+  return (
+    <div className="form-field">
+      <label className="form-label">{label}</label>
+      <textarea
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        rows={rows}
+        className="form-textarea"
+      />
+    </div>
+  );
+};
+
 // URL input with preview
 export const UrlInput = ({ label, value, onChange, placeholder }) => {
   return (
