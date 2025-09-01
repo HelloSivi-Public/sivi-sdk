@@ -27,7 +27,19 @@ function App() {
       
       addLog(`Status check response: ${data.body?.status || 'unknown'}`);
       
-      if (data.status === 200 && data.body?.status === 'complete') {
+      // Append all polling responses to track progress
+      setApiResponse(prev => {
+        if (prev) {
+          return {
+            ...prev,
+            latestResponse: data,
+            allResponses: [...(prev.allResponses || [prev]), data]
+          };
+        }
+        return data;
+      });
+      
+      if (data.status === 200 && data.body?.status === 'completed') {
         addLog('Design generation completed!');
         setIsPolling(false);
         setIsLoading(false);
@@ -42,16 +54,6 @@ function App() {
           addLog(`Found ${variants.length} design variants`);
         }
         
-        setApiResponse(prev => {
-          if (prev) {
-            return {
-              ...prev,
-              latestResponse: data,
-              allResponses: [...(prev.allResponses || [prev]), data]
-            };
-          }
-          return data;
-        });
         return;
       }
       
@@ -121,10 +123,10 @@ function App() {
         setIsPolling(true);
         
         // Start polling after initial delay
-        addLog('Starting status polling in 40 seconds...');
+        addLog('Starting status polling in 50 seconds...');
         setTimeout(() => {
           pollDesignStatus(data.body.requestId, 0);
-        }, 40000);
+        }, 50000);
         
       } else {
         addLog('Design generation failed or returned error');
