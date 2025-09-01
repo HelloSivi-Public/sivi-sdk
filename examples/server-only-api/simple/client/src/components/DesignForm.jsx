@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './FormComponents.css';
 import {
   TextInput,
@@ -10,6 +10,7 @@ import {
   DynamicList,
   UrlInput
 } from './FormComponents';
+import { designTypes, getSubtypesForType, getDimensionsForSubtype, requiresCustomDimensions } from '../data/designTypes';
 
 const DesignForm = ({ onSubmit, initialData }) => {
   const defaultFormData = {
@@ -32,6 +33,22 @@ const DesignForm = ({ onSubmit, initialData }) => {
   };
 
   const [formData, setFormData] = useState(initialData || defaultFormData);
+
+  // Update dimensions when type/subtype changes
+  useEffect(() => {
+    if (!requiresCustomDimensions(formData.type, formData.subtype)) {
+      const dimensions = getDimensionsForSubtype(formData.type, formData.subtype);
+      if (dimensions && dimensions.width && dimensions.height) {
+        setFormData(prev => ({
+          ...prev,
+          dimension: {
+            width: dimensions.width,
+            height: dimensions.height
+          }
+        }));
+      }
+    }
+  }, [formData.type, formData.subtype]);
 
   const updateField = (path, value) => {
     setFormData(prev => {
@@ -143,38 +160,40 @@ const DesignForm = ({ onSubmit, initialData }) => {
         label="Type"
         value={formData.type}
         onChange={(value) => updateField('type', value)}
-        options={[
-          { value: 'displayAds', label: 'Display Ads' },
-          { value: 'socialMedia', label: 'Social Media' },
-          { value: 'print', label: 'Print' }
-        ]}
+        options={Object.entries(designTypes).map(([key, type]) => ({
+          value: key,
+          label: type.label
+        }))}
       />
 
       <SelectInput
         label="Subtype"
         value={formData.subtype}
         onChange={(value) => updateField('subtype', value)}
-        options={[
-          { value: 'displayAds-half-page-ad', label: 'Half Page Ad' },
-          { value: 'displayAds-banner', label: 'Banner' },
-          { value: 'displayAds-square', label: 'Square' }
-        ]}
+        options={Object.entries(getSubtypesForType(formData.type)).map(([key, subtype]) => ({
+          value: key,
+          label: subtype.label
+        }))}
       />
 
-      <div className="dimension-group">
-        <NumberInput
-          label="Width"
-          value={formData.dimension.width}
-          onChange={(value) => updateField('dimension.width', value)}
-          min={1}
-        />
-        <NumberInput
-          label="Height"
-          value={formData.dimension.height}
-          onChange={(value) => updateField('dimension.height', value)}
-          min={1}
-        />
-      </div>
+      {requiresCustomDimensions(formData.type, formData.subtype) && (
+        <div className="dimension-group">
+          <NumberInput
+            label="Width"
+            value={formData.dimension.width}
+            onChange={(value) => updateField('dimension.width', value)}
+            min={1}
+            max={2000}
+          />
+          <NumberInput
+            label="Height"
+            value={formData.dimension.height}
+            onChange={(value) => updateField('dimension.height', value)}
+            min={1}
+            max={2000}
+          />
+        </div>
+      )}
 
       <TextAreaInput
         label="Prompt"
