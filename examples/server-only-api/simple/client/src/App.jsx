@@ -284,23 +284,28 @@ function App() {
               <div className="variants-list">
                 {designVariants.map((variant, index) => {
                   const dimensions = getDimensionFromInput(apiInput);
+                  
+                  // Calculate scaled dimensions with max height of 400px
+                  const maxHeight = 400;
+                  const aspectRatio = dimensions.width / dimensions.height;
+                  
+                  let displayWidth = dimensions.width;
+                  let displayHeight = dimensions.height;
+                  
+                  if (displayHeight > maxHeight) {
+                    displayHeight = maxHeight;
+                    displayWidth = maxHeight * aspectRatio;
+                  }
+                  
                   return (
                     <div key={index} className="variant-row">
-                      <div 
-                        className="variant-image"
-                        style={{
-                          width: `${dimensions.width}px`,
-                          height: `${dimensions.height}px`,
-                          maxWidth: '100%',
-                          maxHeight: '400px'
-                        }}
-                      >
+                      <div className="variant-image">
                         <img 
                           src={variant.url} 
                           alt={`Variant ${index + 1}`}
                           style={{
-                            width: '100%',
-                            height: '100%',
+                            width: `${displayWidth}px`,
+                            height: `${displayHeight}px`,
                             objectFit: 'contain'
                           }}
                         />
