@@ -57,10 +57,26 @@ function App() {
         return;
       }
       
+      // Stop polling if there's an error status
+      if (data.status !== 200) {
+        addLog(`API error: Status ${data.status}. Stopping polling.`);
+        setIsPolling(false);
+        setIsLoading(false);
+        return;
+      }
+      
+      // Stop polling if status indicates failure
+      if (data.body?.status === 'failed' || data.body?.status === 'error') {
+        addLog(`Design generation failed: ${data.body?.status}. Stopping polling.`);
+        setIsPolling(false);
+        setIsLoading(false);
+        return;
+      }
+      
       // Continue polling with different intervals
       let nextDelay;
       if (pollCount === 1) {
-        nextDelay = 20000; // 20 seconds for second poll
+        nextDelay = 45000; // 20 seconds for second poll
       } else if (pollCount === 2) {
         nextDelay = 20000; // 20 seconds for third poll
       } else {
@@ -74,7 +90,7 @@ function App() {
       }, nextDelay);
       
     } catch (error) {
-      addLog(`Polling error: ${error.message}`);
+      addLog(`Polling error: ${error.message}. Stopping polling.`);
       setIsPolling(false);
       setIsLoading(false);
     }
@@ -123,10 +139,10 @@ function App() {
         setIsPolling(true);
         
         // Start polling after initial delay
-        addLog('Starting status polling in 50 seconds...');
+        addLog('Starting status polling in 5 seconds...');
         setTimeout(() => {
           pollDesignStatus(data.body.requestId, 0);
-        }, 50000);
+        }, 5000);
         
       } else {
         addLog('Design generation failed or returned error');
