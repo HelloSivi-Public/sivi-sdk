@@ -77,22 +77,30 @@ app.get('/get-request-status', (req, res) => {
 
     console.time('get-request-status')
 
-    fetch(`${process.env.SIVI_API_URL}/get-request-status`, {
-        method: 'GET',
+    const queryParams = JSON.stringify({
+        requestId: req.query.requestId
+    });
+    
+    const encodedQueryParams = encodeURIComponent(queryParams);
+    
+    const url = new URL(`${process.env.SIVI_API_URL}/general/get-request-status`);
+    url.searchParams.append('queryParams', encodedQueryParams);
+
+    fetch(url, {
+        method: 'GET',˝
         headers: {
             'Content-Type': 'application/json',
             'sivi-api-key': process.env.SIVI_API_KEY
-        },
-        params: {
-            requestId: req.query.requestId
         }
     })
         .then(response => {
             console.timeEnd('get-request-status')
             return response.json()
-        }
-        )
-        .then(data => res.json(data))
+        })
+        .then(data => {
+            console.log('get-request-status response:', data);
+            res.json(data)
+        })
         .catch(error => {
             console.error('Error:', error);
             console.timeEnd('get-request-status')
