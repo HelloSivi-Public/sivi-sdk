@@ -11,8 +11,8 @@ import {
   UrlInput
 } from './FormComponents';
 
-const DesignForm = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
+const DesignForm = ({ onSubmit, initialData }) => {
+  const defaultFormData = {
     type: 'displayAds',
     subtype: 'displayAds-half-page-ad',
     dimension: {
@@ -29,7 +29,9 @@ const DesignForm = ({ onSubmit }) => {
     language: 'english',
     numOfVariants: 4,
     outputFormat: ['jpg']
-  });
+  };
+
+  const [formData, setFormData] = useState(initialData || defaultFormData);
 
   const updateField = (path, value) => {
     setFormData(prev => {
@@ -201,6 +203,9 @@ const DesignForm = ({ onSubmit }) => {
       <div className="colors-section">
         <label className="form-label">Colors</label>
         <div className="colors-list">
+          <button type="button" onClick={addColor} className="add-color-button">
+            Add Color
+          </button>
           {formData.colors.map((color, index) => (
             <div key={index} className="color-item">
               <ColorInput
@@ -219,9 +224,7 @@ const DesignForm = ({ onSubmit }) => {
             </div>
           ))}
         </div>
-        <button type="button" onClick={addColor} className="add-color-button">
-          Add Color
-        </button>
+
       </div>
 
       <SelectInput
