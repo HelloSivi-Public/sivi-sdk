@@ -86,44 +86,6 @@ const ApiMonitor = ({ apiLogs, apiResponse, apiInput, designVariants, onClearLog
                   <div className="input-json">
                     <pre>{JSON.stringify(apiInput, null, 2)}</pre>
                   </div>
-                  
-                  {designVariants && designVariants.length > 0 && (
-                    <div className="variants-preview">
-                      <h4>Design Variants</h4>
-                      <div className="variants-scroll-container">
-                        {designVariants.map((variant, index) => {
-                          const dimensions = getDimensionFromInput(apiInput);
-                          return (
-                            <div key={index} className="variant-box">
-                              <div 
-                                className="variant-image-container"
-                                style={{
-                                  width: `${Math.min(dimensions.width / 2, 200)}px`,
-                                  height: `${Math.min(dimensions.height / 2, 200)}px`
-                                }}
-                              >
-                                <img 
-                                  src={variant.url} 
-                                  alt={`Variant ${index + 1}`}
-                                  style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover'
-                                  }}
-                                />
-                              </div>
-                              <div className="variant-info">
-                                <span>Variant {index + 1}</span>
-                                <span className="variant-dimensions">
-                                  {dimensions.width} × {dimensions.height}
-                                </span>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
                 </div>
               )}
             </div>

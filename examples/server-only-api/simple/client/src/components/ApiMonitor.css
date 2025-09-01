@@ -149,17 +149,15 @@
 .input-display {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   height: 100%;
 }
 
 .input-json {
-  flex: 0 0 auto;
-  max-height: 40%;
+  flex: 1;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 8px;
+  padding: 12px;
 }
 
 .input-json pre {

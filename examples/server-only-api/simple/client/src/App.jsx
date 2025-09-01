@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import DesignForm from './components/DesignForm'
 import ApiMonitor from './components/ApiMonitor'
 import { designPresets } from './presets/designPresets'
+import { getDimensionFromInput } from './utils/dimensionMapping'
 
 function App() {
   const [selectedPreset, setSelectedPreset] = useState('');
@@ -220,12 +221,37 @@ function App() {
                 )}
               </div>
             ) : designVariants.length > 0 ? (
-              <div className="variants-grid">
-                {designVariants.map((variant, index) => (
-                  <div key={index} className="variant-item">
-                    <img src={variant.url} alt={`Variant ${index + 1}`} />
-                  </div>
-                ))}
+              <div className="variants-list">
+                {designVariants.map((variant, index) => {
+                  const dimensions = getDimensionFromInput(apiInput);
+                  return (
+                    <div key={index} className="variant-row">
+                      <div 
+                        className="variant-image"
+                        style={{
+                          width: `${dimensions.width}px`,
+                          height: `${dimensions.height}px`,
+                          maxWidth: '100%',
+                          maxHeight: '400px'
+                        }}
+                      >
+                        <img 
+                          src={variant.url} 
+                          alt={`Variant ${index + 1}`}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                          }}
+                        />
+                      </div>
+                      <div className="variant-details">
+                        <span className="variant-label">Variant {index + 1}</span>
+                        <span className="variant-size">{dimensions.width} × {dimensions.height}</span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="empty-state">
