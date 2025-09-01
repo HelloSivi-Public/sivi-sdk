@@ -9,6 +9,7 @@ function App() {
   const [formKey, setFormKey] = useState(0);
   const [apiResponse, setApiResponse] = useState(null);
   const [apiLogs, setApiLogs] = useState([]);
+  const [apiInput, setApiInput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [designVariants, setDesignVariants] = useState([]);
   const [isPolling, setIsPolling] = useState(false);
@@ -100,6 +101,7 @@ function App() {
     setIsLoading(true);
     setApiResponse(null);
     setDesignVariants([]);
+    setApiInput(formData);
     
     const startTime = Date.now();
     addLog('Starting API call to /designs-from-prompt');
@@ -168,6 +170,7 @@ function App() {
   const handleClearLogs = () => {
     setApiLogs([]);
     setApiResponse(null);
+    setApiInput(null);
     setDesignVariants([]);
     setIsPolling(false);
   };
@@ -234,6 +237,8 @@ function App() {
           <ApiMonitor 
             apiLogs={apiLogs}
             apiResponse={apiResponse}
+            apiInput={apiInput}
+            designVariants={designVariants}
             onClearLogs={handleClearLogs}
           />
         </main>
