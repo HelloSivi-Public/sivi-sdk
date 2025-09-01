@@ -143,12 +143,36 @@
 
 .dynamic-list-item {
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.95);
   position: relative;
   width: 100%;
   box-sizing: border-box;
+}
+
+.dynamic-list-item .form-label {
+  color: #333;
+  font-weight: 600;
+}
+
+.dynamic-list-item .form-input {
+  background: rgba(255, 255, 255, 1);
+  color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.dynamic-list-item .form-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dynamic-list-item .form-input:focus {
+  border-color: #5662EC;
+  box-shadow: 0 0 0 2px rgba(86, 98, 236, 0.2);
+}
+
+.dynamic-list-item .checkbox-label {
+  color: #333;
 }
 
 .asset-item {
@@ -162,6 +186,24 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+.dynamic-list-item .image-preferences .checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dynamic-list-item .image-preferences .checkbox-item input {
+  width: 16px;
+  height: 16px;
+  accent-color: #5662EC;
+}
+
+.dynamic-list-item .image-preferences .checkbox-item label {
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .remove-button {
