@@ -1,7 +1,13 @@
 import './App.css'
 import React from 'react'
+import DesignForm from './components/DesignForm'
 
 function App() {
+  const handleFormSubmit = (formData) => {
+    console.log('Form submitted with data:', formData);
+    // Here you would typically send the data to your API
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
@@ -10,18 +16,9 @@ function App() {
       
       <div className="app-content">
         <aside className="sidebar">
-           
-            <div className="control-panel">
-              <div className="control-content">
-                <p>How to Run</p>
-              </div>
-              <button 
-                onClick={() => {}} 
-                className="ai-studio-button"
-              >
-                Generate Design
-              </button>
-            </div>
+          <div className="control-panel">
+            <DesignForm onSubmit={handleFormSubmit} />
+          </div>
         </aside>
         
         <main className="main-content">
