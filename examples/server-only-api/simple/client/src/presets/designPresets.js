@@ -34,14 +34,14 @@ export const designPresets = {
       assets: {
         images: [
           {
-            url: 'https://media.hellosivi.com/system/generated-images/SDS-1/cluys6nvb036ws6016bd2o1l6.jpg',
+            url: 'https://media.hellosivi.com/photos/se4WDeo0vkA.jpg',
             imagePreference: {
               crop: true,
               removeBg: false
             }
           },
           {
-            url: 'https://media.hellosivi.com/system/generated-images/SDS-1/cltx4tx35095bs601fsiqc3b3.jpg',
+            url: 'https://media.hellosivi.com/photos/sM7n56orwHM.jpg',
             imagePreference: {
               crop: true,
               removeBg: false
@@ -71,7 +71,7 @@ export const designPresets = {
       assets: {
         images: [
           {
-            url: 'https://media.hellosivi.com/system/generated-images/SDS-1/clu35q9el07its601ntv8ljji.jpg',
+            url: 'https://media.hellosivi.com/photos/ssl11TjAFoA.jpg',
             imagePreference: {
               crop: true,
               removeBg: false
@@ -101,7 +101,7 @@ export const designPresets = {
       assets: {
         images: [
           {
-            url: 'https://images.unsplash.com/photo-1649083048770-82e8ffd80431?ixid=M3wzMzc5NnwwfDF8c2VhcmNofDExfHxtb2Rlcm4lMjBkZXNpZ258ZW58MHx8fHwxNzUzOTg4OTQ5fDA',
+            url: 'https://media.hellosivi.com/photos/sGBdpCxKCqY.jpeg',
             imagePreference: {
               crop: true,
               removeBg: false
@@ -136,7 +136,7 @@ export const designPresets = {
       assets: {
         images: [
           {
-            url: 'https://media.hellosivi.com/system/generated-images/sivi/28e41b71680414c04f6d562ffd041cd2.jpeg',
+            url: 'https://media.hellosivi.com/photos/sEDpfWhzojS.jpeg',
             imagePreference: {
               crop: true,
               removeBg: false
@@ -166,7 +166,7 @@ export const designPresets = {
       assets: {
         images: [
           {
-            url: 'https://media.hellosivi.com/system/generated-images/sivi/d5a97d88c94a687320e4efaee0c4eccd.jpeg',
+            url: 'https://media.hellosivi.com/photos/s300YDkgbpa.jpeg',
             imagePreference: {
               crop: true,
               removeBg: false
