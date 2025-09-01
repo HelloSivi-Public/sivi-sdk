@@ -87,7 +87,7 @@ app.get('/get-request-status', (req, res) => {
     url.searchParams.append('queryParams', encodedQueryParams);
 
     fetch(url, {
-        method: 'GET',˝
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'sivi-api-key': process.env.SIVI_API_KEY
