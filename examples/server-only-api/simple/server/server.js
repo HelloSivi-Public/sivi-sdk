@@ -49,15 +49,17 @@ app.get('/get-design-variants', (req, res) => {
 
     console.time('get-design-variants')
 
-    fetch(`${process.env.SIVI_API_URL}/get-design-variants`, {
+    const queryParams = JSON.stringify({
+        designId: req.query.designId
+    });
+    const url = new URL(`${process.env.SIVI_API_URL}/general/get-design-variants`);
+    url.searchParams.append('queryParams', queryParams);
+    fetch(url, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'sivi-api-key': process.env.SIVI_API_KEY
         },
-        params: {
-            designId: req.query.designId
-        }
     })
         .then(response => {
             console.timeEnd('get-design-variants')
@@ -81,10 +83,8 @@ app.get('/get-request-status', (req, res) => {
         requestId: req.query.requestId
     });
     
-    const encodedQueryParams = encodeURIComponent(queryParams);
-    
     const url = new URL(`${process.env.SIVI_API_URL}/general/get-request-status`);
-    url.searchParams.append('queryParams', encodedQueryParams);
+    url.searchParams.append('queryParams', queryParams);
 
     fetch(url, {
         method: 'GET',
